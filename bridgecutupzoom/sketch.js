@@ -47,7 +47,6 @@ var noiseshifted;
 var scaleFactor, translateX, translateY;;
 
 function preload() {
-   bg = loadImage("7.jpg", setup);
   
 }
 
