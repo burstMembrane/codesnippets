@@ -1,59 +1,14 @@
-//
-//
-//var n = 0;
-//var millis = 100;
-//var result;
-//function preload() {
-//  var trees = loadStrings("flannery.txt");
-//}
-//
-//function setup() {
-// createCanvas(innerWidth,innerHeight);
-//    frameRate(1);
-//   
-//    textSize(36);
-//text(trees[0], randomX, randomY); 
-//    
-//    //framerate(30);
-//}
-//
-//function draw() {
-//    
-//    
-//         background(255);
-//   var randomWord = random(trees.length);
-//   var randomX = random(innerWidth/2);
-//var randomY = random(innerHeight/2);
-// textSize(32);
-//
-//   
-//textSize(36);
-//text(trees[0], randomX, randomY); 
-//
-//
-//  
-//     
-//}
-//
-
-
 var result = [];
- var splitresult = [];
+var splitresult = [];
 var joinedresult = [];
 var strings;
 var ind;
-    var noiseinit;
+var noiseinit;
 var noiseshifted;
 var scaleFactor, translateX, translateY;;
 
-function preload() {
-  
-}
-
 function setup() {
      
-  
- 
  createCanvas(windowWidth,windowHeight);
      scaleFactor = 1;
    translateX = 0;
@@ -64,9 +19,6 @@ function setup() {
  frameRate(30);
       loadStrings('bridge.txt', fileReady);
 
-  //  capture.size(320, 240);
- 
-  //var  strings = loadStrings(splitresult);
    
 }
      
