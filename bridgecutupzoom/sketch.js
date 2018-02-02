@@ -17,7 +17,7 @@ function setup() {
     
      background(0);
  frameRate(30);
-      loadStrings('bridge.txt', fileReady);
+      loadStrings('https://github.com/burstMembrane/interfacespeech/blob/master/bridgecutupzoom/bridge.txt', fileReady);
 
    
 }
