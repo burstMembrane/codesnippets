@@ -101,13 +101,7 @@ var randomSize = int(random(16));
 
 
 
-function mouseClicked() {
-  if (value === 0) {
-    value = 255;
-  } else {
-    value = 0;
-  }
-}
+
 
 function mouseMoved() {
 
