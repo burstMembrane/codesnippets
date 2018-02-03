@@ -1,17 +1,17 @@
 # Test repo for media art projects/web design experiments
 
 ## Speech Recognizer
-<a>www.burstmembrane.github.io/interfacespeech/speechrecognizer</a>
+<a>https://burstmembrane.github.io/interfacespeech/speechrecognizer/</a>
 
 A minimal speech to text interface
 
 ## interfacething
-<a>www.burstmembrane.github.io/interfacespeech/interfacething/</a>
+<a>https://burstmembrane.github.io/interfacespeech/interfacething/</a>
 
 Messing around with p5.js, random sprite generation and text.
 
 ## Bridgecutupzoom
-<a>www.burstmembrane.github.io/interfacespeech/bridgecutupzoom/</a>
+<a>https://burstmembrane.github.io/interfacespeech/bridgecutupzoom/</a>
 
 Experimenting with webgl and burroughs cutup techniques on a short story "the Bridge"
 
