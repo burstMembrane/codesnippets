@@ -81,7 +81,7 @@ function fileReady(result)
     {  
         joinedresult = join(result, ' \n');
     
-            splitresult = splitTokens(joinedresult, ", -*.'!?");
+            splitresult = splitTokens(joinedresult, "-*.'!?");
  
   
         
