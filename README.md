@@ -3,17 +3,17 @@
 feel free to use anything you want if you think it'll be useful.
 
 ## Speech Recognizer
-www.burstmembrane.github.io/interfacespeech/speechrecognizer
+<a>www.burstmembrane.github.io/interfacespeech/speechrecognizer</a>
 
 A minimal speech to text interface
 
 ## interfacething
-www.burstmembrane.github.io/interfacespeech/interfacething/
+<a>www.burstmembrane.github.io/interfacespeech/interfacething/</a>
 
 Messing around with p5.js, random sprite generation and text.
 
 ## Bridgecutupzoom
-www.burstmembrane.github.io/interfacespeech/bridgecutupzoom/
+<a>www.burstmembrane.github.io/interfacespeech/bridgecutupzoom/</a>
 Experimenting with webgl and burroughs cutup techniques on a short story "the Bridge"
 
-www.liamfpower.com
+<a>www.liamfpower.com</a>
