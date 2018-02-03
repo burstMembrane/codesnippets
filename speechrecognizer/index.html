@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-
+<html>
 <link rel="stylesheet" type="text/css" href="styles.css">
 
 <style>
@@ -34,6 +34,7 @@ span {
      <H!> WARNING: USE HEADPHONES </H!>
     <script src="js/jquery.js"></script>
     <script src="js/webpd-latest.js"></script>
+ 
     <script>
         var patch
         $.get('patches/myPatch.pd', function(patchStr) {
@@ -46,21 +47,22 @@ span {
 
     </head>
     <body>
+         <H2>
+            Speak into the microphone<br>
+            Listen to the headphones
+             </H2>
+        
         <div class="container">
-            <H1>
-            Speak into the microphone
-            </H1>
-         
-                <H1>Listen to the headphones
-            </H1>
+           
             
-            <div>  <button id="start-record-btn" title="Start Recording">Start Recognition</button> </div>
+            <div>  <button id="start-record-btn" title="Start Recording">Start Recognition</button><button id="stop-record-btn" title="Stop Recording">Stop Recognition</button> </div>
+          
             
 <div>
     <p><div class="app"> 
-    <div class="input-single"></p></div>
+    <div class="input-single"></div></div>
             
-                    <textarea id="note-textarea"  rows="6" readonly cols 10></textarea>
+                    <textarea id="note-textarea" readonly wrap="hard"></textarea>
                 </div>         
                 
                 
@@ -70,7 +72,7 @@ span {
               
             </div>
 
-        </div>
+      
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="script.js"></script>

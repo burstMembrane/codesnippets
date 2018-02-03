@@ -1,41 +1,59 @@
 * {
  font-size: 100%;
- font-family: sans-serif;
+ font-family:  system-ui;
     color: white;
-    text-align: center
+    text-align: center;
     
 }
 
+
 textarea {
-  width: 1000px;
+ 
 
     background-color: black;
-    
+    position:fixed;
+    width: 50%;
                 height:1000px;
                 resize: none;
+    text-align: left;
     font-size: 1em;
  font-weight: bold;
  
-      
+          
   border: 0px solid #888; 
 }
 
 
 
-button {
-    background-color: white; /* Black */
-    border: 2px;
+
+.button {
+  
+}
+
+button:hover {
+    background-color: black; /* Green */
     color: white;
-    padding: 15px 32px;
-   border-style: double
+}
+
+
+button {  -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.2s;
+    
+    background-color: white;   
+    border: 10px;
+    color: black;
+    padding: 10px 24px;
+   border-style: single;
     text-align: center;
     text-decoration: none;
-    display: inline-block;
+    
     font-size: 16px;
 }
 
+
 container {
-    background-color: black;
+    background-color: darkslategray;
+    color: darkslategrey;
     
     
 }

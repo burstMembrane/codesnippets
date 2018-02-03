@@ -55,6 +55,7 @@ recognition.onresult = function(event) {
 
 recognition.onstart = function() { 
   instructions.text('Active.');
+   
 }
 
 recognition.onspeechend = function() {
@@ -78,12 +79,14 @@ recognition.onerror = function(event) {
 $('#start-record-btn').on('click', function(e) {
   if (noteContent.length) {
     noteContent += ' ';
+     
   }
   recognition.start();
+console.log(event.results[current]);
 });
 
 
-$('#pause-record-btn').on('click', function(e) {
+$('#stop-record-btn').on('click', function(e) {
   recognition.stop();
   instructions.text('Voice recognition paused.');
 });
@@ -91,6 +94,7 @@ $('#pause-record-btn').on('click', function(e) {
 // Sync the text inside the text area with the noteContent variable.
 noteTextarea.on('input', function() {
   noteContent = $(this).val();
+   
 })
 
 $('#save-note-btn').on('click', function(e) {
@@ -131,24 +135,6 @@ notesList.on('click', function(e) {
     target.closest('.note').remove();
   }
 });
-
-
-
-/*-----------------------------
-      Speech Synthesis 
-------------------------------*/
-
-function readOutLoud(message) {
-	var speech = new SpeechSynthesisUtterance();
-
-  // Set the text and voice attributes.
-	speech.text = message;
-	speech.volume = 1;
-	speech.rate = 1;
-	speech.pitch = 1;
-  
-	window.speechSynthesis.speak(speech);
-}
 
 
 
@@ -203,3 +189,12 @@ function deleteNote(dateTime) {
   localStorage.removeItem('note-' + dateTime); 
 }
 
+var button = document.querySelector('.button');
+
+button.onclick = function () {
+ var red = Math.floor(Math.random() * 256);
+ var blue = Math.floor(Math.random() * 256);
+ var green = Math.floor(Math.random() * 256);
+
+ this.style.backgroundColor = "rgb(" + red + "," + green + "," + blue + ")";
+};
