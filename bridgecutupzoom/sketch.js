@@ -90,13 +90,13 @@ function fileReady(result)
     
 function draw()
 {
-   background(0);
+   background(0,0,0);
    
      scale(scaleFactor);
    //  translate(mouseX, mouseY);
     var randomOpacity = random(127);
-    var randomX = random(innerWidth);
-var randomY = random(innerHeight);
+    var randomX = random(innerWidth * 2.5);
+var randomY = random(innerHeight * 2.5);
 var randomSize = int(random(16));
      if (value == 255) {
    translate(mx, 0, my, 0);
