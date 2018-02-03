@@ -1,42 +1,3 @@
-//
-//
-//var n = 0;
-//var millis = 100;
-//var result;
-//function preload() {
-//  var trees = loadStrings("flannery.txt");
-//}
-//
-//function setup() {
-// createCanvas(innerWidth,innerHeight);
-//    frameRate(1);
-//   
-//    textSize(36);
-//text(trees[0], randomX, randomY); 
-//    
-//    //framerate(30);
-//}
-//
-//function draw() {
-//    
-//    
-//         background(255);
-//   var randomWord = random(trees.length);
-//   var randomX = random(innerWidth/2);
-//var randomY = random(innerHeight/2);
-// textSize(32);
-//
-//   
-//textSize(36);
-//text(trees[0], randomX, randomY); 
-//
-//
-//  
-//     
-//}
-//
-
-
 var result = [];
  var splitresult = [];
 var joinedresult = [];
@@ -58,6 +19,8 @@ function setup() {
   
  
  createCanvas(innerWidth,innerHeight, WEBGL);
+    setAttributes('antialias', true);
+
      pg = createGraphics(innerWidth, innerHeight);
  // pg.textSize(100);
      scaleFactor = 1;
@@ -99,7 +62,7 @@ function draw()
 var randomY = random(innerHeight * 2.5);
 var randomSize = int(random(16));
      if (value == 255) {
-   translate(mx, 0, my, 0);
+   translate(mx, 0, my,);
      }
      
       
