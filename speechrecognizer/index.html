@@ -31,6 +31,16 @@ span {
         <title>Dictation Liam Power</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+     <H!> WARNING: USE HEADPHONES </H!>
+    <script src="js/jquery.js"></script>
+    <script src="js/webpd-latest.js"></script>
+    <script>
+        var patch
+        $.get('patches/myPatch.pd', function(patchStr) {
+          patch = Pd.loadPatch(patchStr)
+          Pd.start()
+        })
+    </script>
         
         
 

@@ -1,0 +1,9 @@
+#N canvas 0 23 450 300 10;
+#X obj 192 115 dac~;
+#X obj 185 30 adc~;
+#X obj 192 58 delwrite~ delay 200;
+#X obj 87 78 delread~ delay 200;
+#X connect 1 0 2 0;
+#X connect 1 1 2 0;
+#X connect 3 0 0 0;
+#X connect 3 0 0 1;
