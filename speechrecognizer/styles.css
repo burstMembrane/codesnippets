@@ -3,12 +3,37 @@
  font-family:  system-ui;
     color: white;
     text-align: center;
-    
+
 }
 
 
+ #navbar ul {
+    margin: 0;
+    padding: 5px;
+    list-style-type: none;
+    text-align: center;
+    background-color: #333;
+    }
+
+#navbar ul li {
+    display: inline;
+    }
+
+#navbar ul li a {
+    text-decoration: none;
+    padding: .1em 1em;
+    color: #fff;
+    background-color: #333;
+    }
+
+#navbar ul li a:hover {
+    color: #000;
+    background-color: #fff;
+    }
+
+
 textarea {
- 
+
 
     background-color: black;
     position:fixed;
@@ -18,16 +43,16 @@ textarea {
     text-align: left;
     font-size: 1em;
  font-weight: bold;
- 
-          
-  border: 0px solid #888; 
+
+
+  border: 0px solid #888;
 }
 
 
 
 
 .button {
-  
+
 }
 
 button:hover {
@@ -38,15 +63,15 @@ button:hover {
 
 button {  -webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.2s;
-    
-    background-color: white;   
+
+    background-color: white;
     border: 10px;
     color: black;
     padding: 10px 24px;
    border-style: single;
     text-align: center;
     text-decoration: none;
-    
+
     font-size: 16px;
 }
 
@@ -54,6 +79,6 @@ button {  -webkit-transition-duration: 0.4s; /* Safari */
 container {
     background-color: darkslategray;
     color: darkslategrey;
-    
-    
+
+
 }

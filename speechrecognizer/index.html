@@ -1,83 +1,94 @@
 <!DOCTYPE html>
 <html>
-<link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+ <div id="navbar">
+            <ul>
+            <li><a href="https://burstmembrane.github.io/interfacespeech/">Home</a></li>
+                 <li><a href="https://burstmembrane.github.io/interfacespeech/interfacething/"> Github: Interface</a></li>
+                 <li><a href="https://burstmembrane.github.io/interfacespeech/bridgecutupzoom/">Bridge Cut-
 
-<style>
-  body {
-background-color: black;
-  text-align: center;
-  font-family: monaco, monospace;
-  background-size: cover;
-}
-h1 h2 {
-  display: inline-block;
-  background: #fff;
-}
-h1 {
-  font-size: 30px
-}
-h2 {
-  font-size: 30px;
-}
-span {
-  background: #fd0;
-}
-</style>
-  
+                <li><a href="https://burstmembrane.github.io/interfacespeech/speechrecognizer/">Speech Recognizer/Voice Jammer</a></li>
+                     up</a></li>
+                 <li><a href="http://www.liamfpower.com">liamfpower.com</a></li>
 
-<head>
+            </ul>
+            </div>
+    <style>
+        body {
+            background-color: black;
+            text-align: center;
+            font-family: monaco, monospace;
+            background-size: cover;
+        }
+        h1 h2 {
+            display: inline-block;
+            background: #fff;
+        }
+        h1 {
+            font-size: 30px
+        }
+        h2 {
+            font-size: 30px;
+        }
+        span {
+            background: #fd0;
+        }
+    </style>
+
+
+    <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Dictation Liam Power</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-     <H!> WARNING: USE HEADPHONES </H!>
-    <script src="js/jquery.js"></script>
-    <script src="js/webpd-latest.js"></script>
- 
-    <script>
-        var patch
-        $.get('patches/myPatch.pd', function(patchStr) {
-          patch = Pd.loadPatch(patchStr)
-          Pd.start()
-        })
-    </script>
-        
-        
+        <H!> WARNING: USE HEADPHONES </H!>
+        <script src="js/jquery.js"></script>
+        <script src="js/webpd-latest.js"></script>
+
+        <script>
+            var patch
+            $.get('patches/myPatch.pd', function(patchStr) {
+                patch = Pd.loadPatch(patchStr)
+                Pd.start()
+            })
+        </script>
+
+
 
     </head>
     <body>
-         <H2>
+        <H2>
             Speak into the microphone<br>
             Listen to the headphones
-             </H2>
-        
+        </H2>
+
         <div class="container">
-           
-            
+
+
             <div>  <button id="start-record-btn" title="Start Recording">Start Recognition</button><button id="stop-record-btn" title="Stop Recording">Stop Recognition</button> </div>
-          
-            
-<div>
-    <p><div class="app"> 
-    <div class="input-single"></div></div>
-            
-                    <textarea id="note-textarea" readonly wrap="hard"></textarea>
-                </div>         
-                
-                
-                
-              
-                
-              
+
+
+            <div>
+                <p><div class="app">
+                <div class="input-single"></div></div>
+
+                <textarea id="note-textarea" readonly wrap="hard"></textarea>
             </div>
 
-      
+
+
+
+
+
+        </div>
+
+
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="script.js"></script>
 
-      
+
 
     </body>
 </html>
