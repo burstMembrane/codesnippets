@@ -23,19 +23,19 @@ renderNotes(notes);
 
 
 /*-----------------------------
-      Voice Recognition 
+      Voice Recognition
 ------------------------------*/
 
 // If false, the recording will stop after a few seconds of silence.
 // When true, the silence period is longer (about 15 seconds),
-// allowing us to keep recording even when the user pauses. 
+// allowing us to keep recording even when the user pauses.
 recognition.continuous = true;
 
-// This block is called every time the Speech APi captures a line. 
+// This block is called every time the Speech APi captures a line.
 recognition.onresult = function(event) {
 
   // event is a SpeechRecognitionEvent object.
-  // It holds all the lines we have captured so far. 
+  // It holds all the lines we have captured so far.
   // We only need the current one.
   var current = event.resultIndex;
 
@@ -53,33 +53,36 @@ recognition.onresult = function(event) {
   }
 };
 
-recognition.onstart = function() { 
+recognition.onstart = function() {
+    Pd.start();
   instructions.text('Active.');
-   
+
 }
 
 recognition.onspeechend = function() {
+
   instructions.text('Inactive.');
 }
 
 recognition.onerror = function(event) {
   if(event.error == 'no-speech') {
-    instructions.text('You garbled that one. Try again.');  
+    instructions.text('You garbled that one. Try again.');
   };
 }
 
 
 
 /*-----------------------------
-      App buttons and input 
+      App buttons and input
 ------------------------------*/
 
 
 
 $('#start-record-btn').on('click', function(e) {
+
   if (noteContent.length) {
     noteContent += ' ';
-     
+
   }
   recognition.start();
 console.log(event.results[current]);
@@ -87,6 +90,7 @@ console.log(event.results[current]);
 
 
 $('#stop-record-btn').on('click', function(e) {
+     Pd.stop();
   recognition.stop();
   instructions.text('Voice recognition paused.');
 });
@@ -94,7 +98,7 @@ $('#stop-record-btn').on('click', function(e) {
 // Sync the text inside the text area with the noteContent variable.
 noteTextarea.on('input', function() {
   noteContent = $(this).val();
-   
+
 })
 
 $('#save-note-btn').on('click', function(e) {
@@ -114,7 +118,7 @@ $('#save-note-btn').on('click', function(e) {
     noteTextarea.val('');
     instructions.text('Note saved successfully.');
   }
-      
+
 })
 
 
@@ -130,7 +134,7 @@ notesList.on('click', function(e) {
 
   // Delete note.
   if(target.hasClass('delete-note')) {
-    var dateTime = target.siblings('.date').text();  
+    var dateTime = target.siblings('.date').text();
     deleteNote(dateTime);
     target.closest('.note').remove();
   }
@@ -139,7 +143,7 @@ notesList.on('click', function(e) {
 
 
 /*-----------------------------
-      Helper Functions 
+      Helper Functions
 ------------------------------*/
 
 function renderNotes(notes) {
@@ -153,7 +157,7 @@ function renderNotes(notes) {
           <a href="#" class="delete-note" title="Delete">Delete</a>
         </p>
         <p class="content">${note.content}</p>
-      </li>`;    
+      </li>`;
     });
   }
   else {
@@ -179,14 +183,14 @@ function getAllNotes() {
         date: key.replace('note-',''),
         content: localStorage.getItem(localStorage.key(i))
       });
-    } 
+    }
   }
   return notes;
 }
 
 
 function deleteNote(dateTime) {
-  localStorage.removeItem('note-' + dateTime); 
+  localStorage.removeItem('note-' + dateTime);
 }
 
 var button = document.querySelector('.button');

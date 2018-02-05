@@ -36,10 +36,10 @@ textarea {
 
 
     background-color: black;
-    position:fixed;
-    width: 50%;
+
+    width: 75%;
                 height:1000px;
-                resize: none;
+
     text-align: left;
     font-size: 1em;
  font-weight: bold;
@@ -65,10 +65,10 @@ button {  -webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.2s;
 
     background-color: white;
-    border: 10px;
+    border: 1px;
     color: black;
     padding: 10px 24px;
-   border-style: single;
+   border-style: double;
     text-align: center;
     text-decoration: none;
 
