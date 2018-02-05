@@ -1,3 +1,10 @@
+* {
+ font-size: 100%;
+ font-family:  system-ui;
+    color: white;
+    text-align: center;
+
+}
 
  #navbar ul {
     margin: 0;
