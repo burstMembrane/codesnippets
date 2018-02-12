@@ -16,11 +16,12 @@ var value;
 var mx;
 var my;
 
-var sensitivity = 0.005;
+var sensitivity = 10;
 var zMin = 0.05;
-var zMax = 9.00;
+var zMax = 1000.00;
+var zoom;
 var vid;
-
+var  zoomVector;
 
 function setup() {
 
@@ -65,6 +66,7 @@ function mouseWheel(event ) {
     var zoom = 0;
     zoom += sensitivity * event.delta;
     zoom = constrain(zoom, zMin, zMax);
+  //var  zoomVector = createVector(zoom);
     console.log(zoom);
 
     //uncomment to block page scrolling
@@ -81,8 +83,8 @@ function draw()
  var randomY = random(innerHeight * 2.5);
  var randomSize = int(random(16));
 
- translate(mx, my, zoom);
 
+//scale(zoom);
 
 
  var r = int(random(splitresult.length));
@@ -103,6 +105,8 @@ push();
 
 
 
+console.log(zoom)
+
  pg.textAlign(CENTER);
  pg.textFont('arial', 8);
  pg.textSize(randomSize);
@@ -121,13 +125,6 @@ pop();
 
 }
 
-function windowResized() {
-    resizeCanvas(windowWidth, windowHeight);
-//    background(0);
-
-
-
-}
 
 
 
@@ -143,4 +140,6 @@ function mouseMoved() {
 
     mx = mouseX +- innerWidth/2;
     my = mouseY +- innerHeight/2;
+    translate(mx,my,zoom);
+
 }

@@ -30,6 +30,7 @@ renderNotes(notes);
 // When true, the silence period is longer (about 15 seconds),
 // allowing us to keep recording even when the user pauses.
 recognition.continuous = true;
+recognition.interimResults = true;
 
 // This block is called every time the Speech APi captures a line.
 recognition.onresult = function(event) {
