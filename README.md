@@ -15,7 +15,7 @@ Messing around with p5.js, random sprite generation and text.
 
 ## liamfpower.com
 test website for my art projects
-[liamfpower] (https://burstmembrane.github.io/interfacespeech/liamfpower/)
+[liamfpower](https://burstmembrane.github.io/interfacespeech/liamfpower/)
 
 Experimenting with webgl and burroughs cutup techniques on a short story "the Bridge"
 
