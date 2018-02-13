@@ -13,7 +13,7 @@ function noise(ctx) {
         len = buffer32.length,
         i = 0;
 
-    for(; i < len;i++)
+    for (; i < len; i++)
         if (Math.random() < 0.9) buffer32[i] = 0xff000000;
 
     ctx.putImageData(idata, 0, 0);
@@ -43,3 +43,14 @@ window.onresize = resize;
     requestAnimationFrame(loop);
 
 })();
+
+
+$(document).ready(function () {
+    var hash = window.location.hash;
+    var link = $('a');
+    $('a').click(function (e) {
+        e.preventDefault();
+        hash = link.attr("href");
+        window.location = hash;
+    });
+});
