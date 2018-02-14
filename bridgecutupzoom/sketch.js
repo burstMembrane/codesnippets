@@ -6,7 +6,7 @@ var ind;
 var noiseinit;
 var noiseshifted;
 var scaleFactor, translateX, translateY;;
-var URL = "https://" + "burstmembrane.github.io" + "/interfacespeech/bridgecutupzoom/bridge.txt" ;
+var URL = "https://" + "liamfpower.com/codesnippets/bridgecutupzoom/bridge.txt";
 var bg;
 var r;
 var randomOpacity;
@@ -21,14 +21,14 @@ var zMin = 0.05;
 var zMax = 1000.00;
 var zoom;
 var vid;
-var  zoomVector;
+var zoomVector;
 
 function setup() {
 
 
-//vid.size(innerWidth, innerHeight);
+    //vid.size(innerWidth, innerHeight);
     bg = loadImage("7.jpg");
-    createCanvas(innerWidth,innerHeight, WEBGL);
+    createCanvas(innerWidth, innerHeight, WEBGL);
     setAttributes('antialias', true);
 
     pg = createGraphics(innerWidth, innerHeight);
@@ -51,8 +51,7 @@ function setup() {
 
 
 
-function fileReady(result)
-{
+function fileReady(result) {
 
     joinedresult = join(result, ' \n');
 
@@ -62,66 +61,66 @@ function fileReady(result)
 
 }
 
-function mouseWheel(event ) {
+function mouseWheel(event) {
     var zoom = 0;
     zoom += sensitivity * event.delta;
     zoom = constrain(zoom, zMin, zMax);
-  //var  zoomVector = createVector(zoom);
+    //var  zoomVector = createVector(zoom);
     console.log(zoom);
 
     //uncomment to block page scrolling
     // return false;
 }
 
-function draw()
-{var zoom ;
+function draw() {
+    var zoom;
 
 
- //  translate(mouseX, mouseY);
- var randomOpacity = random(127);
- var randomX = random(innerWidth * 2.5);
- var randomY = random(innerHeight * 2.5);
- var randomSize = int(random(16));
+    //  translate(mouseX, mouseY);
+    var randomOpacity = random(127);
+    var randomX = random(innerWidth * 2.5);
+    var randomY = random(innerHeight * 2.5);
+    var randomSize = int(random(16));
 
 
-//scale(zoom);
+    //scale(zoom);
 
 
- var r = int(random(splitresult.length));
+    var r = int(random(splitresult.length));
 
- //  console.log(randomWord);
+    //  console.log(randomWord);
 
- //
- //noiseinit = noise();
- //noiseinit = map(noiseinit, 0, 1, 0, splitresult.length);
- ////
- //noiseshifted = int(noiseinit);
- //   // console.log(noiseshifted);
- ////
-
-
-
-push();
+    //
+    //noiseinit = noise();
+    //noiseinit = map(noiseinit, 0, 1, 0, splitresult.length);
+    ////
+    //noiseshifted = int(noiseinit);
+    //   // console.log(noiseshifted);
+    ////
 
 
 
-console.log(zoom)
+    push();
 
- pg.textAlign(CENTER);
- pg.textFont('arial', 8);
- pg.textSize(randomSize);
- pg.fill(randomOpacity);
- //pg.stroke(255);
- var randomWord = splitresult[r];
- pg.text(String(randomWord), randomX, randomY);
 
- plane(innerWidth * 2.5,innerHeight * 2.5);
- texture(pg);
 
- plane(innerWidth * 2.5, innerHeight * 2.5);
-pop();
+    console.log(zoom)
 
- //  scale(zoom);
+    pg.textAlign(CENTER);
+    pg.textFont('arial', 8);
+    pg.textSize(randomSize);
+    pg.fill(randomOpacity);
+    //pg.stroke(255);
+    var randomWord = splitresult[r];
+    pg.text(String(randomWord), randomX, randomY);
+
+    plane(innerWidth * 2.5, innerHeight * 2.5);
+    texture(pg);
+
+    plane(innerWidth * 2.5, innerHeight * 2.5);
+    pop();
+
+    //  scale(zoom);
 
 }
 
@@ -138,8 +137,8 @@ function mouseClicked() {
 
 function mouseMoved() {
 
-    mx = mouseX +- innerWidth/2;
-    my = mouseY +- innerHeight/2;
-    translate(mx,my,zoom);
+    mx = mouseX + -innerWidth / 2;
+    my = mouseY + -innerHeight / 2;
+    translate(mx, my, zoom);
 
 }
