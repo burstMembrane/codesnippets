@@ -1,17 +1,17 @@
 # Test repo for media art projects/web design experiments
 
 ## Speech Recognizer
-[Speech Recognizer](https://burstmembrane.github.io/codesnippets/speechrecognizer/)
+[Speech Recognizer](https://liamfpower.com/codesnippets/speechrecognizer/)
 
 A minimal speech to text interface
 
 ## interfacething
-[interfacething](https://burstmembrane.github.io/codesnippets/interfacething/)
+[interfacething](https://liamfpower.com/codesnippets/interfacething/)
 
 Messing around with p5.js, random sprite generation and text.
 
 ## Bridgecutupzoom
-[Bridgecutupzoom](https://burstmembrane.github.io/codesnippets/bridgecutupzoom/)
+[Bridgecutupzoom](https://liamfpower.com/codesnippets/bridgecutupzoom/)
 
 Experimenting with webgl and burroughs cutup techniques on a short story "the Bridge"
 
