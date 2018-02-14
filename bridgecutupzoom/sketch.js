@@ -6,7 +6,7 @@ var ind;
 var noiseinit;
 var noiseshifted;
 var scaleFactor, translateX, translateY;;
-var URL = "https://" + "liamfpower.com/codesnippets/bridgecutupzoom/bridge.txt";
+var URL = "./bridge.txt";
 var bg;
 var r;
 var randomOpacity;
