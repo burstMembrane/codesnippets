@@ -1,82 +1,91 @@
 <!DOCTYPE html>
 <html>
-    <link rel="stylesheet" type="text/css" href="styles.css">
-    <div id="navbar">
-        <ul>
-            <li><a href="https://burstmembrane.github.io/interfacespeech/">Home</a></li>
-            <li><a href="https://burstmembrane.github.io/interfacespeech/interfacething/"> Interfacething </a></li>
-            <li><a href="https://burstmembrane.github.io/interfacespeech/bridgecutupzoom/">Bridge Cutup</a></li>
-            <li><a href="https://burstmembrane.github.io/interfacespeech/speechrecognizer/">Voice Jammer</a></li>
-            <li><a href="http://www.liamfpower.com">liamfpower.com</a></li>
+<link rel="stylesheet" type="text/css" href="styles.css">
+<div id="navbar">
+    <ul>
+        <li><a href="http://www.liamfpower.com">liamfpower.com</a></li>
+        <li><a href="https://liamfpower.com/codesnippets/interfacething/"> Interfacething</a></li>
+        <li><a href="https://liamfpower.com/codesnippets/bridgecutupzoom/">Bridge Cutup</a></li>
+        <li><a href="https://liamfpower.com/codesnippets/speechrecognizer/">Voice Jammer</a></li>
+        <li>
+    </ul>
+</div>
 
-        </ul>
-    </div>
-    <style>
-        body {
-            background-color: black;
-            text-align: center;
-            font-family: monaco, monospace;
-            background-size: cover;
-        }
-        h1 h2 {
-            display: inline-block;
-            background: #fff;
-        }
-        h1 {
-            font-size: 30px
-        }
-        h2 {
-            font-size: 30px;
-        }
-        span {
-            background: #fd0;
-        }
-    </style>
+<style>
+    body {
+        background-color: black;
+        text-align: center;
+        font-family: monaco, monospace;
+        background-size: cover;
+    }
 
+    h1 h2 {
+        display: inline-block;
+        background: #fff;
+    }
 
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Dictation Liam Power</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <H!> WARNING: USE HEADPHONES </H!>
-        <script src="js/jquery.js"></script>
-        <script src="js/webpd-latest.js"></script>
+    h1 {
+        font-size: 30px
+    }
 
-        <script>
-            var patch
-            $.get('patches/myPatch.pd', function(patchStr) {
-                patch = Pd.loadPatch(patchStr)
+    h2 {
+        font-size: 30px;
+    }
 
-            })
-        </script>
+    span {
+        background: #fd0;
+    }
+
+</style>
 
 
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Dictation Liam Power</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <H!> WARNING: USE HEADPHONES </H!>
+    <script src="js/jquery.js"></script>
+    <script src="js/webpd-latest.js"></script>
 
-    </head>
-    <body>
-        <H2>
-            Speak into the microphone<br>
-            Listen to the headphones
-        </H2>
+    <script>
+        var patch
+        $.get('patches/myPatch.pd', function(patchStr) {
+            patch = Pd.loadPatch(patchStr)
 
-        <div class="container">
+        })
 
-
-            <div>  <button id="start-record-btn" title="Start Recording">Start Recognition</button><button id="stop-record-btn" title="Stop Recording">Stop Recognition</button> </div>
-<div>
-     <div>
+    </script>
 
 
-                 <p id="instructions"> </div>
+
+</head>
+
+<body>
+    <H2>
+        Speak into the microphone<br> Listen to the headphones
+    </H2>
+
+    <div class="container">
+
+
+        <div> <button id="start-record-btn" title="Start Recording">Start Recognition</button><button id="stop-record-btn" title="Stop Recording">Stop Recognition</button> </div>
+        <div>
+            <div>
+
+
+                <p id="instructions">
+            </div>
 
 
             <div>
-                <p><div class="app">
-                <div class="input-single"></div></div>
+                <p>
+                    <div class="app">
+                        <div class="input-single"></div>
+                    </div>
 
-                <textarea id="note-textarea" readonly wrap="hard"></textarea>
+                    <textarea id="note-textarea" readonly wrap="hard"></textarea>
             </div>
 
 
@@ -93,7 +102,6 @@
 
 
 
-    </body>
+</body>
+
 </html>
-
-
