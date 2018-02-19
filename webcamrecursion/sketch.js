@@ -10,7 +10,9 @@ function preload() {
             facingMode: "user"
         }
     };
+
     video = createCapture(constraints);
+
     video.elt.setAttribute('playsinline', true);
     video.elt.setAttribute('autoplay', true);
 
@@ -18,6 +20,8 @@ function preload() {
 }
 
 function setup() {
+    button = createButton('save image');
+    button.id('instructions');
     createCanvas(windowWidth, windowHeight, P2D);
 
     // Initialize columns and rows
@@ -32,6 +36,7 @@ function setup() {
 }
 
 function draw() {
+    button.mousePressed(saveImage)
 
     //videoScale = scaleslider.value;
     //video.hide();
@@ -72,7 +77,7 @@ function draw() {
 
 }
 
-function mousePressed() {
+function saveImage() {
 
     save("webcam.jpg")
     return false;
