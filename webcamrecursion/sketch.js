@@ -71,3 +71,9 @@ function draw() {
 
 
 }
+
+function mousePressed() {
+
+    save("webcam.jpg")
+    return false;
+}
