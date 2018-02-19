@@ -11,7 +11,13 @@ function setup() {
     rows = height / videoScale;
 
     pixelDensity(1);
-    video = createCapture(VIDEO);
+    var constraints = {
+        audio: false,
+        video: {
+            facingMode: "user"
+        }
+    };
+    video = createCapture(constraints);
     video.size(cols, rows);
     video.hide();
 
