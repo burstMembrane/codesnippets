@@ -3,21 +3,29 @@ var scaleslider;
 // Number of columns and rows in our system
 var cols, rows;
 
+function preload() {
+
+    var constraints = {
+        video: {
+            facingMode: "user"
+        }
+    };
+    video = createCapture(constraints);
+    video.elt.setAttribute('playsinline', true);
+    video.elt.setAttribute('autoplay', true);
+
+
+}
+
 function setup() {
-    createCanvas(innerWidth, innerHeight, P2D);
+    createCanvas(windowWidth, windowHeight, P2D);
 
     // Initialize columns and rows
     cols = width / videoScale;
     rows = height / videoScale;
 
     pixelDensity(1);
-    var constraints = {
-        audio: false,
-        video: {
-            facingMode: "user"
-        }
-    };
-    video = createCapture(constraints);
+
     video.size(cols, rows);
     video.hide();
 
