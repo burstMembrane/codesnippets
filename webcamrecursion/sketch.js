@@ -1,5 +1,7 @@
-var videoScale = 10;
-
+var videoScale = 20;
+var video;
+var x = width;
+var y = height;
 // Number of columns and rows in our system
 var cols, rows;
 
@@ -11,25 +13,20 @@ function preload() {
         }
     };
     video = createCapture(constraints);
-<<<<<<< HEAD
 
 
-=======
-    video.elt.setAttribute('playsinline', true);
-    video.elt.setAttribute('autoplay', true);
->>>>>>> parent of c1e78bb... added save image button
+
 
 
 }
 
 function setup() {
-<<<<<<< HEAD
 
+
+    createCanvas(window.innerWidth, window.innerHeight, P2D);
     button = createButton('save image');
+    button.position(0, 0);
     button.id('instructions');
-=======
->>>>>>> parent of c1e78bb... added save image button
-    createCanvas(windowWidth, windowHeight, P2D);
 
     // Initialize columns and rows
     cols = width / videoScale;
@@ -43,15 +40,13 @@ function setup() {
 }
 
 function draw() {
-<<<<<<< HEAD
-    button.mousePressed(saveImage);
-=======
->>>>>>> parent of c1e78bb... added save image button
 
+    button.mousePressed(saveImage);
+    video.loadPixels();
     //videoScale = scaleslider.value;
     //video.hide();
     background(0);
-    video.loadPixels();
+
 
     // Begin loop for columns
     for (var i = 0; i < cols; i++) {
@@ -76,7 +71,7 @@ function draw() {
             var x = i * videoScale;
             var y = j * videoScale;
             // tint(r, g, b, 255);
-            image(video, x + videoScale / 2, y + videoScale / 2, sz, sz);
+            image(video, x + videoScale / 2, y + videoScale / 2, sz, sz, );
 
 
         }
@@ -84,10 +79,20 @@ function draw() {
     }
 
 
+
 }
 
-function mousePressed() {
+function saveImage() {
 
     save("webcam.jpg")
     return false;
 }
+
+
+window.onresize = function () {
+    var w = window.innerWidth;
+    var h = window.innerHeight;
+    canvas.size(w, h);
+    width = w;
+    height = h;
+};
