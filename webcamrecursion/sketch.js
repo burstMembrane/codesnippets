@@ -17,7 +17,6 @@ function preload() {
     video.elt.setAttribute('autoplay', true);
 
 
-
 }
 
 function setup() {

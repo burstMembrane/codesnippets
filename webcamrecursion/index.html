@@ -5,12 +5,13 @@
 
     <style>
         body {
-            background-color: black
+            background-color: black color:white;
         }
 
         #instructions {
             position: absolute;
             float: left;
+
             z-index: 100;
             background-color: black;
             /* Green */
@@ -26,10 +27,31 @@
 
         }
 
-        #instructions:hover {
+        #p5_loading {
+            position: relative;
 
+            float: left;
+            z-index: 100;
             background-color: white;
             /* Green */
+            border: none;
+            color: black;
+            padding: 10px 10px;
+            margin: 0px auto;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            transition: 0.1s;
+
+
+        }
+
+        #instructions:hover {
+            visibility: visible;
+
+            background-color: white;
+
             color: black;
 
             transition: 0.1s;
@@ -43,7 +65,7 @@
             position: absolute;
 
             z-index: 100;
-            margin: 0px 150px;
+            margin: 0px 110px;
             background-color: black;
             /* Green */
             border: none;
@@ -65,7 +87,7 @@
         }
 
         #link:hover {
-
+            opacity: 1;
             background-color: white;
             /* Green */
             color: black;
@@ -74,6 +96,12 @@
             -webkit-transition: 0.1s;
 
 
+        }
+
+        #link a:hover {
+
+            color: black;
+            text-decoration: none;
         }
     </style>
 
@@ -88,10 +116,13 @@
     <script src="./p5.dom.js"></script>
     <script src="../addons/p5.sound.min.js"></script>
     <script src="sketch.js"></script>
+
 </head>
 
 <body>
+    <div id="p5_loading" class="loadingclass">loading</div>
 
+    <button id="link"> <a href="javascript:history.back()">back</a></button>
 
-
+</body>
 </html>
