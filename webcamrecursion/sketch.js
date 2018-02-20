@@ -1,5 +1,5 @@
 var videoScale = 20;
-var scaleslider;
+
 // Number of columns and rows in our system
 var cols, rows;
 
@@ -17,9 +17,11 @@ function preload() {
     video.elt.setAttribute('autoplay', true);
 
 
+
 }
 
 function setup() {
+
     button = createButton('save image');
     button.id('instructions');
     createCanvas(windowWidth, windowHeight, P2D);
@@ -36,7 +38,7 @@ function setup() {
 }
 
 function draw() {
-    button.mousePressed(saveImage)
+    button.mousePressed(saveImage);
 
     //videoScale = scaleslider.value;
     //video.hide();
@@ -61,12 +63,11 @@ function draw() {
             // A bright pixel is a large rectangle, and a dark pixel is a small one.
 
             var sz = map((r + g + b) / 3, 0, 255, 0, videoScale);
-            rectMode(CENTER);
-            fill(255);
-            noStroke();
+
             // For every column and row, a rectangle is drawn at an (x,y) location scaled and sized by videoScale.
             var x = i * videoScale;
             var y = j * videoScale;
+            // tint(r, g, b, 255);
             image(video, x + videoScale / 2, y + videoScale / 2, sz, sz);
 
 
