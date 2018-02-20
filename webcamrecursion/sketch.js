@@ -10,18 +10,25 @@ function preload() {
             facingMode: "user"
         }
     };
-
     video = createCapture(constraints);
+<<<<<<< HEAD
 
 
+=======
+    video.elt.setAttribute('playsinline', true);
+    video.elt.setAttribute('autoplay', true);
+>>>>>>> parent of c1e78bb... added save image button
 
 
 }
 
 function setup() {
+<<<<<<< HEAD
 
     button = createButton('save image');
     button.id('instructions');
+=======
+>>>>>>> parent of c1e78bb... added save image button
     createCanvas(windowWidth, windowHeight, P2D);
 
     // Initialize columns and rows
@@ -36,7 +43,10 @@ function setup() {
 }
 
 function draw() {
+<<<<<<< HEAD
     button.mousePressed(saveImage);
+=======
+>>>>>>> parent of c1e78bb... added save image button
 
     //videoScale = scaleslider.value;
     //video.hide();
@@ -76,7 +86,7 @@ function draw() {
 
 }
 
-function saveImage() {
+function mousePressed() {
 
     save("webcam.jpg")
     return false;
