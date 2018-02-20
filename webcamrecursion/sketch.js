@@ -1,22 +1,21 @@
 var videoScale = 20;
 var video;
-var x = width;
-var y = height;
+
 // Number of columns and rows in our system
 var cols, rows;
 
 function preload() {
+
 
     var constraints = {
         video: {
             facingMode: "user"
         }
     };
+
+
+
     video = createCapture(constraints);
-
-
-
-
 
 }
 
@@ -29,23 +28,23 @@ function setup() {
     button.id('instructions');
 
     // Initialize columns and rows
-    cols = width / videoScale;
-    rows = height / videoScale;
+    cols = window.innerWidth / videoScale;
+    rows = window.innerHeight / videoScale;
 
-    pixelDensity(1);
 
     video.size(cols, rows);
+
     video.hide();
 
 }
 
 function draw() {
-
     button.mousePressed(saveImage);
     video.loadPixels();
     //videoScale = scaleslider.value;
     //video.hide();
     background(0);
+
 
 
     // Begin loop for columns
@@ -68,15 +67,28 @@ function draw() {
             var sz = map((r + g + b) / 3, 0, 255, 0, videoScale);
 
             // For every column and row, a rectangle is drawn at an (x,y) location scaled and sized by videoScale.
+
             var x = i * videoScale;
             var y = j * videoScale;
-            // tint(r, g, b, 255);
-            image(video, x + videoScale / 2, y + videoScale / 2, sz, sz, );
+            //
 
+
+            push();
+
+
+            // tint(r, g, b, 255)
+
+            image(video, x + videoScale / 2, y + videoScale / 2, sz, sz);
+            // noTint();
+            pop();
+            //  tint(r, g, b, 255);
 
         }
-
     }
+
+
+
+
 
 
 
@@ -88,11 +100,10 @@ function saveImage() {
     return false;
 }
 
-
 window.onresize = function () {
     var w = window.innerWidth;
     var h = window.innerHeight;
     canvas.size(w, h);
     width = w;
     height = h;
-};
+}
