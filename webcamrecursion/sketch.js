@@ -1,4 +1,4 @@
-var videoScale = 20;
+var videoScale = 10;
 
 // Number of columns and rows in our system
 var cols, rows;
@@ -13,8 +13,7 @@ function preload() {
 
     video = createCapture(constraints);
 
-    video.elt.setAttribute('playsinline', true);
-    video.elt.setAttribute('autoplay', true);
+
 
 
 }
