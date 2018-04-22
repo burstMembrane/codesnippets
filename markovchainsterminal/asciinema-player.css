@@ -6,8 +6,9 @@ body {
 
 html {
     background-color: #121314;
-    overflow: scroll;
+    overflow: hidden;
     overflow-x: hidden;
+
 }
 
 ::-webkit-scrollbar {
@@ -31,6 +32,7 @@ html {
     text-align: justify;
     width: 100%;
     outline: none;
+    overflow: hidden;
     background-color: #121314;
 }
 
