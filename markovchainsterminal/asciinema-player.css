@@ -1,8 +1,4 @@
-* {
-
-    overflow: hidden;
-
-}
+* {}
 
 .html::-webkit-scrollbar {
     width: 0 !important
@@ -11,12 +7,12 @@
 
 body {
     background-color: #121314;
-    overflow: hidden;
+
 }
 
 html {
     background-color: #121314;
-    overflow: hidden;
+
 
 
 }
