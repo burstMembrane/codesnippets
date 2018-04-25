@@ -10,15 +10,35 @@
     <script src="./p5.dom.js"></script>
 
 
+
 </head>
 
 <body>
 
-    <asciinema-player cols="125" rows="28" speed="1" src="./markov.cast" autoplay="true" font-size="medium" loop="true" preload="true" start-at="23" theme="asciinema
-"></asciinema-player>
+
 
 
     <script src="./asciinema-player.js"></script>
+
+
+
+
+    <asciinema-player cols="125" rows="28" src="./markov.cast" autoplay="true" font-size="medium" loop="true" preload="true" theme="asciinema
+" start-at="23"></asciinema-player>
+
+
+    <script>
+        var x = Math.floor((Math.random() * 100) + 1);
+
+        var elem = document.getElementsByTagName("asciinema-player")[0]; // Get the first <h1> element in the document
+        var att = document.createAttribute("start-at"); // Create a "class" attribute
+        att.value = x; // Set the value of the class attribute
+        elem.setAttributeNode(att); // Add the class attribute to <h1>
+    </script>
+
+
+
+
 </body>
 
 </html>
