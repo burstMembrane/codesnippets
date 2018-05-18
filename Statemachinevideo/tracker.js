@@ -10,7 +10,7 @@ Video Camera Classification using p5.js
 === */
 var rectImage;
 
-const classifier = new ml5.ImageClassifier('SqueezeNet');
+const classifier = new ml5.ImageClassifier('MobileNet');
 var capture;
 
 var tracker;
@@ -19,22 +19,23 @@ let classifyimage;
 var yoffset;
 var camPos;
 var camLastSize;
+var results;
 p5.disableFriendlyErrors = true;
 
-setInterval(guess, 2000);
+
 
 function setup() {
-    createCanvas(window.innerWidth, window.innerHeight)
+    createCanvas(window.innerWidth, window.innerHeight, P2D);
     //capture = createImg("http://192.168.1.107:8081/");
-    frameRate(30);
+    //    frameRate(30);
 
     capture = createCapture(VIDEO, guess);
-    capture.size(320, 240);
+    capture.size(640, 360);
     //capture the webcam
-    capture.position(0, 50) //move the capture to the top left
+    capture.position(0, 0) //move the capture to the top left
     capture.style('opacity', 0) // use this to hide the capture later on (change to 0 to hide)...
     capture.id("myVideo"); //give the capture an ID so we can use it in the tracker below.
-
+    frameRate(60);
     var tracker = new tracking.ObjectTracker(['face']);
     tracker.setInitialScale(6.5);
     tracker.setStepSize(1);
@@ -54,39 +55,52 @@ function setup() {
 
 }
 
+function guess() {
+    if (rectImage) {
+        classifier.predict(capture.elt, 2, gotResult);
+    }
+}
+
+function gotResult(results) {
+    // The results are in an array ordered by probability.
+    if (results) {
+        for (var i = 0; i < results.length; i++) {
+            select('#result').html(results[0].label);
+
+        }
+        // setTimeout(guess, 100);
+    }
+}
+
 function draw() {
 
     //  console.log(frameRate);
     if (trackingData) { //if there is tracking data to look at, then...
-        // guess();
+
         for (var i = 0; i < trackingData.length; i++) { //loop through tracking data;
-
-
-
 
             rectImage = capture.get(trackingData[i].x, trackingData[i].y, trackingData[i].width, trackingData[i].height);
 
             image(rectImage, trackingData[i].x, trackingData[i].y, trackingData[i].width * 2, trackingData[i].height * 2);
+            filter(GRAY);
+            if (i = trackingData.length) {
+                guess();
+            }
 
 
-            //            image(capture, trackingData[i].x, trackingData[i].y, trackingData[i].width, trackingData[i].height, trackingData[i].x, trackingData[i].y, trackingData[i].width, trackingData[i].height);
 
 
 
 
         }
+
+        for (var i = 0; i < trackingData.length; i++) { //loop through tracking data;
+            var element = select("#result");
+            element.position(trackingData[i].x, trackingData[i].y - 10);
+
+        }
     }
 
 
-
-}
-
-function guess() {
-    classifier.predict(capture.elt, 10, gotResult);
-}
-
-function gotResult(results) {
-    // The results are in an array ordered by probability.
-    select('#result').html(results[0].label);
 
 }

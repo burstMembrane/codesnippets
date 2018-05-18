@@ -1,17 +1,30 @@
-#video    {
-    
+#video {
+
     visibility: hidden;
     position: static;
-    
-    
+
+
 }
 
-#canvas    {
-    position: absolute;
- 
+#canvas {
+    position: relative;
+    margin: 0 auto;
     z-index: 100;
-    
+   
+
 }
+
+#result {
+
+    font-size: 18pt;
+
+
+
+
+
+
+}
+
 body {
     background: #000;
     color: white;
