@@ -10,7 +10,7 @@ Video Camera Classification using p5.js
 === */
 var rectImage;
 
-const classifier = new ml5.ImageClassifier('MobileNet');
+let classifier;
 var capture;
 
 var tracker;
@@ -29,13 +29,15 @@ function setup() {
     //capture = createImg("http://192.168.1.107:8081/");
     //    frameRate(30);
 
-    capture = createCapture(VIDEO, guess);
+    capture = createCapture(VIDEO);
+
     capture.size(640, 360);
     //capture the webcam
     capture.position(0, 0) //move the capture to the top left
     capture.style('opacity', 0) // use this to hide the capture later on (change to 0 to hide)...
     capture.id("myVideo"); //give the capture an ID so we can use it in the tracker below.
     frameRate(60);
+    classifier = ml5.imageClassifier('MobileNet', capture);
     var tracker = new tracking.ObjectTracker(['face']);
     tracker.setInitialScale(6.5);
     tracker.setStepSize(1);
