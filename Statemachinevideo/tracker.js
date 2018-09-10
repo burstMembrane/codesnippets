@@ -10,9 +10,9 @@ Video Camera Classification using p5.js
 === */
 var rectImage;
 
-let classifier;
-var capture;
 
+var capture;
+let classifier;
 var tracker;
 var trackingData;
 let classifyimage;
@@ -37,7 +37,7 @@ function setup() {
     capture.style('opacity', 0) // use this to hide the capture later on (change to 0 to hide)...
     capture.id("myVideo"); //give the capture an ID so we can use it in the tracker below.
     frameRate(60);
-    classifier = ml5.imageClassifier('MobileNet', capture);
+
     var tracker = new tracking.ObjectTracker(['face']);
     tracker.setInitialScale(6.5);
     tracker.setStepSize(1);
@@ -48,7 +48,7 @@ function setup() {
 
     });
     // start the tracking of the colors above on the camera in p5
-
+    const classifier = ml5.imageClassifier('MobileNet', capture);
     //start detecting the tracking
     tracker.on('track', function (event) { //this happens each time the tracking happens
         trackingData = event.data // break the trackingjs data into a global so we can access it with p5
@@ -59,7 +59,7 @@ function setup() {
 
 function guess() {
     if (rectImage) {
-        classifier.predict(capture.elt, 2, gotResult);
+        classifier.predict(capture.elt, gotResult);
     }
 }
 
