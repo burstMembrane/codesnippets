@@ -15,26 +15,31 @@ var cnt = 0;
 var changeFlag = false;
 var downScaledVid = new p5.Image(w, h);
 var interactionStartedFlag = false;
-
-
+var letterBag = ['SYNTHETIC', 'PERCEPTION'];
+var divisions = [2.8, 2];
 p5.disableFriendlyErrors = true; // disables FES
 function preload() {
 
 
-    myVid = createVideo([random(vidFiles)]);
+    myVid = createVideo([random(vidFiles)], videoLoaded);
     myVid.elt.muted = false;
     // fix for some mobile browsers
     myVid.elt.setAttribute('playsinline', '');
     myVid.addCue(0.1, touchEnded);
-
-
     vidaSetup();
-    console.log("loading complete");
+
+}
+
+function videoLoaded(video) {
+
+
+
+
 }
 
 function setup() {
+    console.log('loading took ' + floor(millis()) + ' milliseconds');
 
-    mobileMax = 500;
 
     // w = windowWidth;
 
@@ -62,27 +67,44 @@ function draw() {
         Wait for user interaction. Some browsers prevent video playback if the
         user does not interact with the webpage yet.
         */
-        if (!interactionStartedFlag) {
-            background(0);
-            fill(127)
-            ellipse(width / 2 + random(-1, 1), height / 2 + random(-1, 1), random(70, 80), random(70, 80));
-            push();
-            noStroke();
-            fill(255);
-            textAlign(CENTER, CENTER);
-            text('tap here', width / 2, height / 2);
-            pop();
-            return;
-        }
 
-        background(0);
-        //image(myVid, 0, 0, width, height);
-        //image(myVida.differenceImage, 0, 0, width, height);
-        if (frameCount % 6 == 0) {
+        if (!interactionStartedFlag) {
+            //background(0);
+            fill(127)
+                //ellipse(width / 2 + random(-1, 1), height / 2 + random(-1, 1), random(70, 80), random(70, 80));
+
             //console.log("tick");
 
 
+
+
+            push();
+
+            fill(frameCount % 255);
+            noStroke();
+            translate(width / 2, height / 2);
+            rotate(radians(frameCount * 5.2 % 360));
+            rect(0, 0, 1, windowHeight * 2);
+
+            pop();
+            for (var x = 0; x < 4; x++) {
+                if (frameCount % 2 == 0) {
+                    push();
+                    fill(random(255));
+                    textSize(100);
+                    textAlign(CENTER, CENTER);
+                    text(letterBag[x], width / 2 + random(-4, 4), height / divisions[x] + random(-4, 4));
+                    pop();
+                }
+            }
+            return;
+
         }
+
+        //background(0);
+        //image(myVid, 0, 0, width, height);
+        //image(myVida.differenceImage, 0, 0, width, height);
+
 
         cropImg = findBlobs();
 
@@ -191,6 +213,7 @@ function touchEnded() {
     /*
       Capture current video frame and put it into the VIDA's background buffer.
     */
+
     if (!interactionStartedFlag) {
         safeStartVideo();
     }
@@ -219,6 +242,9 @@ function safeStartVideo() {
         if (myVid.time() < 1) {
             vidLoad();
             interactionStartedFlag = true;
+            let fs = fullscreen();
+            fullscreen(!fs);
+
             return;
         }
     }
@@ -226,6 +252,9 @@ function safeStartVideo() {
     try {
         vidLoad();
         interactionStartedFlag = true;
+        let fs = fullscreen();
+        fullscreen(!fs);
+
     } catch (e) {
         console.log('[safeStartVideo] ' + e);
     }
