@@ -25,6 +25,14 @@ function preload() {
 
 function setup() {
     frameRate(24);
+    mobileMax = 500;
+
+    // w = windowWidth;
+
+
+    // something kind of like this ...
+
+
     var canvas = createCanvas(windowWidth, windowHeight);
     canvas.parent('sketch-div');
     var x = (windowWidth - width) / 2;
@@ -190,4 +198,9 @@ function vidaSetup() {
     myVida.trackBlobsFlag = false;
     approximateBlobPolygonsFlag = false;
 }
-2
+
+function windowResized() {
+
+    resizeCanvas(windowWidth, windowHeight);
+
+}
