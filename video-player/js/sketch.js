@@ -2,18 +2,20 @@ let myVid;
 let frame;
 let vidFiles = ["./test.mp4"];
 w = 320;
-h = 160;
-const numImages = 4;
+h = 240;
+var numImages = 4;
 var myVideo, // video file
     myVida; // VIDA
 var cropped = [];
 
 
+
+p5.disableFriendlyErrors = true; // disables FES
 function preload() {
 
 
     myVid = createVideo([random(vidFiles)], vidLoad);
-    //myVid.elt.muted = true;
+    myVid.elt.muted = true;
     // fix for some mobile browsers
     myVid.elt.setAttribute('playsinline', '');
     myVid.addCue(0.1, touchEnded);
@@ -24,7 +26,7 @@ function preload() {
 }
 
 function setup() {
-    frameRate(24);
+
     mobileMax = 500;
 
     // w = windowWidth;
@@ -50,17 +52,18 @@ function setup() {
 function draw() {
 
 
-    background(0);
     //image(myVid, 0, 0, width, height);
     //image(myVida.differenceImage, 0, 0, width, height);
-    if (frameCount = frameCount % 24) {
-        console.log("tick");
-        myVida.update(myVid);
+    if (frameCount % 6 == 0) {
+        //console.log("tick");
+
+
     }
 
-    findBlobs();
-
-
+    cropImg = findBlobs();
+    drawGrid(cropImg);
+    updateVideo();
+    //drawFPS();
 
 
 
@@ -80,7 +83,7 @@ function findBlobs() {
     if (arrLength > numImages) {
         temp_blobs.splice(0, arrLength - numImages);
     }
-
+    if (temp_blobs.length == 0) { return myVid.get(temp_rect_x, temp_rect_y, temp_rect_w, temp_rect_h); }
     console.log(temp_blobs.length);
     // define size of the drawing
     var temp_w = w;
@@ -94,40 +97,33 @@ function findBlobs() {
 
     for (var i = 0; i < temp_blobs.length; i++) {
 
-        temp_rect_x = Math.floor(temp_blobs[i].normRectX * temp_w);
-        temp_rect_y = Math.floor(temp_blobs[i].normRectY * temp_h);
-        temp_rect_w = Math.floor(temp_blobs[i].normRectW * temp_w);
-        temp_rect_h = Math.floor(temp_blobs[i].normRectH * temp_h);
-        temp_mass_center_x = Math.floor(temp_blobs[i].normMassCenterX * temp_w);
-        temp_mass_center_y = Math.floor(temp_blobs[i].normMassCenterY * temp_h);
-        // draw bounding box
-        strokeWeight(1);
-        stroke(255, 255, 0);
-        noFill();
-        temp_rect_x = temp_rect_x;
-        temp_rect_y = temp_rect_y;
-        temp_rect_w = temp_rect_w;
-        temp_rect_h = temp_rect_h;
+        temp_rect_x = temp_blobs[i].normRectX * temp_w;
+        temp_rect_y = temp_blobs[i].normRectY * temp_h;
+        temp_rect_w = temp_blobs[i].normRectW * temp_w;
+        temp_rect_h = temp_blobs[i].normRectH * temp_h;
+
+
+        temp_rect_x = ~~temp_rect_x;
+        temp_rect_y = ~~temp_rect_y;
+        temp_rect_w = ~~temp_rect_w;
+        temp_rect_h = ~~temp_rect_h;
         //rect(temp_rect_x, temp_rect_y, temp_rect_w, temp_rect_h);
-
-
         cropped[i] = myVid.get(temp_rect_x, temp_rect_y, temp_rect_w, temp_rect_h);
-
-
-
-
-
-
-
     }
 
 
 
+    return cropped;
 
+
+}
+
+
+function drawGrid(array) {
 
     var rows = 2;
     var cols = 2;
-
+    var numImages = rows * cols;
     var cellHeight = height / rows;
     var cellWidth = width / cols;
 
@@ -144,6 +140,7 @@ function findBlobs() {
             // pixelY += cellHeight;
 
             try {
+
                 image(cropped[x + y], pixelX, pixelY, cellWidth, cellHeight);
             } catch (err) {
 
@@ -157,6 +154,9 @@ function findBlobs() {
 
 
     }
+
+
+
 
 }
 
@@ -190,17 +190,27 @@ function vidaSetup() {
 
 function vidaSetup() {
     myVida = new Vida(this);
-    myVida.normMinBlobArea = 0.0002; // uncomment if needed
+    myVida.normMinBlobArea = 0.002; // uncomment if needed
     myVida.normMaxBlobArea = 0.5; // uncomment if needed
     myVida.imageFilterThreshold = 0.2;
-    myVida.rejectBlobsMethod = myVida.REJECT_NONE_BLOBS;
+    myVida.rejectBlobsMethod = myVida.REJECT_INNER_BLOBS;
     myVida.handleBlobsFlag = true;
     myVida.trackBlobsFlag = false;
     approximateBlobPolygonsFlag = false;
 }
 
 function windowResized() {
-
     resizeCanvas(windowWidth, windowHeight);
+}
 
+function drawFPS() {
+    let fps = frameRate();
+    fill(255);
+    stroke(0);
+    text("FPS: " + fps.toFixed(2), 10, height - 10);
+}
+
+
+function updateVideo() {
+    myVida.update(myVid);
 }
