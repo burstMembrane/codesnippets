@@ -1,21 +1,28 @@
 let myVid;
 let frame;
-let vidFiles = ["./test.mp4"];
+let vidFiles = ["./productreview_downscaled.mp4"];
 w = 320;
 h = 240;
+var rows = 2;
+var cols = 2;
+downScaledW = 320;
+downScaledH = 240;
 var numImages = 4;
-var myVideo, // video file
-    myVida; // VIDA
+// video file
+var myVida; // VIDA
 var cropped = [];
-
+var cnt = 0;
+var changeFlag = false;
+var downScaledVid = new p5.Image(w, h);
+var interactionStartedFlag = false;
 
 
 p5.disableFriendlyErrors = true; // disables FES
 function preload() {
 
 
-    myVid = createVideo([random(vidFiles)], vidLoad);
-    myVid.elt.muted = true;
+    myVid = createVideo([random(vidFiles)]);
+    myVid.elt.muted = false;
     // fix for some mobile browsers
     myVid.elt.setAttribute('playsinline', '');
     myVid.addCue(0.1, touchEnded);
@@ -50,23 +57,43 @@ function setup() {
 }
 
 function draw() {
+    if (myVid !== null && myVid !== undefined) { // safety first
+        /*
+        Wait for user interaction. Some browsers prevent video playback if the
+        user does not interact with the webpage yet.
+        */
+        if (!interactionStartedFlag) {
+            background(0);
+            fill(127)
+            ellipse(width / 2 + random(-1, 1), height / 2 + random(-1, 1), random(70, 80), random(70, 80));
+            push();
+            noStroke();
+            fill(255);
+            textAlign(CENTER, CENTER);
+            text('tap here', width / 2, height / 2);
+            pop();
+            return;
+        }
+
+        background(0);
+        //image(myVid, 0, 0, width, height);
+        //image(myVida.differenceImage, 0, 0, width, height);
+        if (frameCount % 6 == 0) {
+            //console.log("tick");
 
 
-    //image(myVid, 0, 0, width, height);
-    //image(myVida.differenceImage, 0, 0, width, height);
-    if (frameCount % 6 == 0) {
-        //console.log("tick");
+        }
+
+        cropImg = findBlobs();
+
+        drawGrid(cropImg);
+        downScaledVid.copy(myVid, 0, 0, w, h, 0, 0, downScaledW, downScaledH)
+        updateVideo(downScaledVid);
+        drawFPS();
+
 
 
     }
-
-    cropImg = findBlobs();
-    drawGrid(cropImg);
-    updateVideo();
-    //drawFPS();
-
-
-
 }
 
 
@@ -164,6 +191,9 @@ function touchEnded() {
     /*
       Capture current video frame and put it into the VIDA's background buffer.
     */
+    if (!interactionStartedFlag) {
+        safeStartVideo();
+    }
     if (myVid !== null && myVid !== undefined) {
         myVida.setBackgroundImage(myVid);
         console.log('background set');
@@ -181,15 +211,31 @@ function vidLoad() {
 }
 
 
-function vidaSetup() {
-    myVida = new Vida(this);
-    myVida.rejectBlobsMethod = myVida.REJECT_NONE_BLOBS;
-    myVida.handleBlobsFlag = true;
-    myVida.trackBlobsFlag = false;
+function safeStartVideo() {
+    // safety first..
+    if (myVid === null || myVid === undefined) return;
+    // here we check if the video is already playing...
+    if (!isNaN(myVid.time())) {
+        if (myVid.time() < 1) {
+            vidLoad();
+            interactionStartedFlag = true;
+            return;
+        }
+    }
+    // if no, we will try to play it
+    try {
+        vidLoad();
+        interactionStartedFlag = true;
+    } catch (e) {
+        console.log('[safeStartVideo] ' + e);
+    }
 }
+
+
 
 function vidaSetup() {
     myVida = new Vida(this);
+    myVida.progressiveBackgroundFlag = false;
     myVida.normMinBlobArea = 0.002; // uncomment if needed
     myVida.normMaxBlobArea = 0.5; // uncomment if needed
     myVida.imageFilterThreshold = 0.2;
@@ -211,6 +257,6 @@ function drawFPS() {
 }
 
 
-function updateVideo() {
-    myVida.update(myVid);
+function updateVideo(vid) {
+    myVida.update(vid);
 }
