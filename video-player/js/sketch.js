@@ -3,6 +3,8 @@ let frame;
 let vidFiles = ["./yoga_downscaled.mp4"];
 w = 320;
 h = 240;
+debug = false;
+var threshval = 0.1;
 var rows = 2;
 var cols = 2;
 downScaledW = 320;
@@ -20,7 +22,7 @@ var letterBag = ['SYNTHETIC', 'PERCEPTION'];
 var divisions = [2.2, 1.9];
 p5.disableFriendlyErrors = true; // disables FES
 function preload() {
-
+    track = loadSound("./yogachoppedmax.mp3");
     myVid = createVideo([random(vidFiles)], videoLoaded);
     myVid.elt.muted = true;
     // fix for some mobile browsers
@@ -73,7 +75,7 @@ function draw() {
             push();
             idx += 0.1;
             fill((sin(idx) + 1) * 127);
-            console.log();
+
             noStroke();
             translate(width / 2, height / 2);
             rotate(radians(frameCount % 360));
@@ -94,22 +96,33 @@ function draw() {
 
         }
 
-        background(0);
+        //background(0);
         //image(myVid, 0, 0, width, height);
-        image(myVida.differenceImage, 0, 0, width, height);
+        //image(myVida.differenceImage, 0, 0, width, height);
 
         if (frameCount % int(random(20, 200)) == 0) {
-            rows = int(random(2, 6));
-            cols = int(random(2, 6));
+            rows = int(random(1, 4));
+            cols = int(random(1, 4));
 
         }
         cropImg = findBlobs();
-
+        background(0);
         drawGrid(cropImg, rows, cols);
         downScaledVid.copy(myVid, 0, 0, w, h, 0, 0, downScaledW, downScaledH)
         updateVideo(downScaledVid);
         drawFPS();
-
+        if (debug) {
+            image(myVid, 0, 0, width, height);
+            myVida.drawBlobs(0, 0, width, height);
+            myVida.drawActiveZones(0, 0, width, height);
+        }
+        if (!debug) {
+            if (!track.isPlaying()) {
+                track.play();
+                myVid.elt.muted = true;
+            }
+            return;
+        }
 
 
     }
@@ -129,8 +142,15 @@ function findBlobs() {
     if (arrLength > numImages) {
         temp_blobs.splice(0, arrLength - numImages);
     }
-    if (temp_blobs.length == 0) { return myVid.get(temp_rect_x, temp_rect_y, temp_rect_w, temp_rect_h); }
-    console.log(temp_blobs.length);
+    if (temp_blobs.length == 0) {
+        debug = true;
+        track.pause();
+        myVid.elt.muted = false;
+        return;
+    }
+    if (temp_blobs.length > 0) {
+        debug = false;
+    }
     // define size of the drawing
     temp_blobs.sort();
     var temp_w = w;
@@ -167,7 +187,7 @@ function findBlobs() {
 
 
 function drawGrid(array, rows, cols) {
-
+    var idx = 0;
     var rows = rows;
     var cols = cols;
     var numImages = rows * cols;
@@ -176,7 +196,7 @@ function drawGrid(array, rows, cols) {
 
     for (var y = 0; y < rows; y++) {
         for (var x = 0; x < cols; x++) {
-
+            idx += 1;
 
             //calculate cell position
             var pixelX = cellWidth * x;
@@ -188,7 +208,9 @@ function drawGrid(array, rows, cols) {
 
             try {
 
-                image(cropped[x + y], pixelX, pixelY, cellWidth, cellHeight);
+                image(cropped[(idx - 1) + (y * cols)], pixelX, pixelY, cellWidth, cellHeight);
+                if (idx == cropped.length) { idx = 0; }
+                //console.log(idx - 1);
             } catch (err) {
 
 
@@ -227,7 +249,7 @@ function touchEnded() {
 
 function vidLoad() {
     myVid.size(w, h);
-    myVid.play();
+    myVid.loop();
     myVid.hide();
 
 }
@@ -239,7 +261,7 @@ function safeStartVideo() {
     // here we check if the video is already playing...
     if (!isNaN(myVid.time())) {
         if (myVid.time() < 1) {
-
+            track.play();
             vidLoad();
             interactionStartedFlag = true;
             let fs = fullscreen();
@@ -265,14 +287,23 @@ function safeStartVideo() {
 function vidaSetup() {
     myVida = new Vida(this);
     myVida.progressiveBackgroundFlag = true;
+    myVida.handleActiveZonesFlag = true;
     myVida.normMinBlobArea = 0.0002; // uncomment if needed
-    myVida.normMaxBlobArea = 0.9; // uncomment if needed
-    myVida.imageFilterThreshold = 0.1;
-    myVida.rejectBlobsMethod = myVida.REJECT_INNER_BLOBS;
+    myVida.normMaxBlobArea = 1.1; // uncomment if needed
+    myVida.imageFilterThreshold = threshval;
+    myVida.imageFilterFeedback = 0.91;
+    myVida.rejectBlobsMethod = myVida.REJECT_NONE_BLOBS;
     myVida.handleBlobsFlag = true;
     myVida.trackBlobsFlag = false;
     approximateBlobPolygonsFlag = false;
 }
+
+function mouseDragged() {
+
+
+
+}
+
 
 function windowResized() {
     resizeCanvas(windowWidth, windowHeight);
