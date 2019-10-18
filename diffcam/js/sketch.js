@@ -18,34 +18,19 @@ var divisions = [2.2, 1.9];
 p5.disableFriendlyErrors = true; // disables FES
 function preload() {
     track = loadSound('./grainswarm.mp3');
-    setTimeout(1000);
-    myVid = createCapture(VIDEO);
+    myVid = createCapture(VIDEO, vidLoad);
     myVid.elt.muted = true;
     // fix for some mobile browsers
     myVid.elt.setAttribute('playsinline', '');
-    myVid.addCue(0.3, touchEnded);
+    myVid.addCue(0.1, touchEnded);
     vidaSetup();
     console.log(
         '[initCaptureDevice] capture ready. Resolution: ' +
-        myCapture.width + ' ' + myCapture.height
+        myVid.width + ' ' + myVid.height
     );
 
 }
 
-function initCaptureDevice() {
-    try {
-        myVid = createCapture(VIDEO);
-        myVid.size(320, 240);
-        myVid.elt.setAttribute('playsinline', '');
-        myVid.hide();
-        console.log(
-            '[initCaptureDevice] capture ready. Resolution: ' +
-            myCapture.width + ' ' + myCapture.height
-        );
-    } catch (_err) {
-        console.log('[initCaptureDevice] capture error: ' + _err);
-    }
-}
 
 function videoLoaded(video) {
 
@@ -65,7 +50,6 @@ function setup() {
 
 
     var canvas = createCanvas(windowWidth, windowHeight);
-    canvas.parent('sketch-div');
     var x = (windowWidth - width) / 2;
     var y = (windowHeight - height) / 2;
     canvas.position(x, y);
@@ -113,7 +97,7 @@ function touchEnded() {
 
 function vidLoad() {
     myVid.size(w, h);
-    myVid.hide();
+
     reverb = new p5.Reverb();
     track.disconnect();
     reverb.process(track, 3, 2);
@@ -124,27 +108,15 @@ function safeStartVideo() {
     // safety first..
     if (myVid === null || myVid === undefined) return;
     // here we check if the video is already playing...
-    if (!isNaN(myVid.time())) {
-        if (myVid.time() < 1) {
 
-            vidLoad();
-            interactionStartedFlag = true;
-            let fs = fullscreen();
-            fullscreen(!fs);
 
-            return;
-        }
-    }
     // if no, we will try to play it
     try {
         vidLoad();
         interactionStartedFlag = true;
         let fs = fullscreen();
         fullscreen(!fs);
-        myVida.setBackgroundImage(myVid);
-        console.log('background set');
         track.loop();
-
         track.setVolume(0.1);
 
     } catch (e) {
