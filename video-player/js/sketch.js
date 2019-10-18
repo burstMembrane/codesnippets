@@ -18,9 +18,9 @@ var idx = 0;
 var changeFlag = false;
 var downScaledVid = new p5.Image(w, h);
 var interactionStartedFlag = false;
-var letterBag = ['SYNTHETIC', 'PERCEPTION'];
-var divisions = [2.2, 1.9];
-p5.disableFriendlyErrors = true; // disables FES
+var letterBag = ['A SIMPLE', 'RESTORATIVE', 'POSE'];
+var divisions = [2.6, 2.2, 1.9];
+//p5.disableFriendlyErrors = true; // disables FES
 function preload() {
     track = loadSound("./yogachoppedmax.mp3");
     myVid = createVideo([random(vidFiles)], videoLoaded);
@@ -65,6 +65,7 @@ function setup() {
 }
 
 function draw() {
+    frameRate(25);
     if (myVid !== null && myVid !== undefined) { // safety first
         /*
         Wait for user interaction. Some browsers prevent video playback if the
@@ -287,9 +288,9 @@ function safeStartVideo() {
 function vidaSetup() {
     myVida = new Vida(this);
     myVida.progressiveBackgroundFlag = true;
-    myVida.handleActiveZonesFlag = true;
+    myVida.handleActiveZonesFlag = false;
     myVida.normMinBlobArea = 0.0002; // uncomment if needed
-    myVida.normMaxBlobArea = 1.1; // uncomment if needed
+    myVida.normMaxBlobArea = 2; // uncomment if needed
     myVida.imageFilterThreshold = threshval;
     myVida.imageFilterFeedback = 0.91;
     myVida.rejectBlobsMethod = myVida.REJECT_NONE_BLOBS;
@@ -313,6 +314,7 @@ function drawFPS() {
     let fps = frameRate();
     fill(255);
     stroke(0);
+    text("Window: " + width + "x" + height, 10, height - 20);
     text("FPS: " + fps.toFixed(2), 10, height - 10);
 }
 
