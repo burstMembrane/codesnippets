@@ -1,45 +1,46 @@
 let myVid;
 let frame;
-let vidFiles = ["./productreview_downscaled.mp4"];
+let vidFiles = ["./yoga_downscaled.mp4"];
 w = 320;
 h = 240;
 var rows = 2;
 var cols = 2;
 downScaledW = 320;
 downScaledH = 240;
-var numImages = 4;
+var numImages = 16;
 // video file
 var myVida; // VIDA
 var cropped = [];
 var cnt = 0;
+var idx = 0;
 var changeFlag = false;
 var downScaledVid = new p5.Image(w, h);
 var interactionStartedFlag = false;
 var letterBag = ['SYNTHETIC', 'PERCEPTION'];
-var divisions = [2.8, 2];
+var divisions = [2.2, 1.9];
 p5.disableFriendlyErrors = true; // disables FES
 function preload() {
 
-
     myVid = createVideo([random(vidFiles)], videoLoaded);
-    myVid.elt.muted = false;
+    myVid.elt.muted = true;
     // fix for some mobile browsers
     myVid.elt.setAttribute('playsinline', '');
-    myVid.addCue(0.1, touchEnded);
+    myVid.addCue(0.3, touchEnded);
     vidaSetup();
+
 
 }
 
 function videoLoaded(video) {
 
-
+    console.log(myVid);
 
 
 }
 
 function setup() {
     console.log('loading took ' + floor(millis()) + ' milliseconds');
-
+    pixelDensity(1);
 
     // w = windowWidth;
 
@@ -69,29 +70,21 @@ function draw() {
         */
 
         if (!interactionStartedFlag) {
-            //background(0);
-            fill(127)
-                //ellipse(width / 2 + random(-1, 1), height / 2 + random(-1, 1), random(70, 80), random(70, 80));
-
-            //console.log("tick");
-
-
-
-
             push();
-
-            fill(frameCount % 255);
+            idx += 0.1;
+            fill((sin(idx) + 1) * 127);
+            console.log();
             noStroke();
             translate(width / 2, height / 2);
-            rotate(radians(frameCount * 5.2 % 360));
-            rect(0, 0, 1, windowHeight * 2);
+            rotate(radians(frameCount % 360));
+            rect(0, 0, 2, windowHeight * 2);
 
             pop();
             for (var x = 0; x < 4; x++) {
                 if (frameCount % 2 == 0) {
                     push();
                     fill(random(255));
-                    textSize(100);
+                    textSize(48);
                     textAlign(CENTER, CENTER);
                     text(letterBag[x], width / 2 + random(-4, 4), height / divisions[x] + random(-4, 4));
                     pop();
@@ -101,14 +94,18 @@ function draw() {
 
         }
 
-        //background(0);
+        background(0);
         //image(myVid, 0, 0, width, height);
-        //image(myVida.differenceImage, 0, 0, width, height);
+        image(myVida.differenceImage, 0, 0, width, height);
 
+        if (frameCount % int(random(20, 200)) == 0) {
+            rows = int(random(2, 6));
+            cols = int(random(2, 6));
 
+        }
         cropImg = findBlobs();
 
-        drawGrid(cropImg);
+        drawGrid(cropImg, rows, cols);
         downScaledVid.copy(myVid, 0, 0, w, h, 0, 0, downScaledW, downScaledH)
         updateVideo(downScaledVid);
         drawFPS();
@@ -135,6 +132,7 @@ function findBlobs() {
     if (temp_blobs.length == 0) { return myVid.get(temp_rect_x, temp_rect_y, temp_rect_w, temp_rect_h); }
     console.log(temp_blobs.length);
     // define size of the drawing
+    temp_blobs.sort();
     var temp_w = w;
     var temp_h = h;
     // offset from the upper left corner
@@ -168,10 +166,10 @@ function findBlobs() {
 }
 
 
-function drawGrid(array) {
+function drawGrid(array, rows, cols) {
 
-    var rows = 2;
-    var cols = 2;
+    var rows = rows;
+    var cols = cols;
     var numImages = rows * cols;
     var cellHeight = height / rows;
     var cellWidth = width / cols;
@@ -220,6 +218,7 @@ function touchEnded() {
     if (myVid !== null && myVid !== undefined) {
         myVida.setBackgroundImage(myVid);
         console.log('background set');
+
     }
     // init video (if needed)
 
@@ -228,7 +227,7 @@ function touchEnded() {
 
 function vidLoad() {
     myVid.size(w, h);
-    myVid.loop();
+    myVid.play();
     myVid.hide();
 
 }
@@ -240,6 +239,7 @@ function safeStartVideo() {
     // here we check if the video is already playing...
     if (!isNaN(myVid.time())) {
         if (myVid.time() < 1) {
+
             vidLoad();
             interactionStartedFlag = true;
             let fs = fullscreen();
@@ -264,10 +264,10 @@ function safeStartVideo() {
 
 function vidaSetup() {
     myVida = new Vida(this);
-    myVida.progressiveBackgroundFlag = false;
-    myVida.normMinBlobArea = 0.002; // uncomment if needed
-    myVida.normMaxBlobArea = 0.5; // uncomment if needed
-    myVida.imageFilterThreshold = 0.2;
+    myVida.progressiveBackgroundFlag = true;
+    myVida.normMinBlobArea = 0.0002; // uncomment if needed
+    myVida.normMaxBlobArea = 0.9; // uncomment if needed
+    myVida.imageFilterThreshold = 0.1;
     myVida.rejectBlobsMethod = myVida.REJECT_INNER_BLOBS;
     myVida.handleBlobsFlag = true;
     myVida.trackBlobsFlag = false;
