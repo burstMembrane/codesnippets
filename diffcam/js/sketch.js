@@ -98,9 +98,6 @@ function touchEnded() {
 function vidLoad() {
     myVid.size(w, h);
 
-    reverb = new p5.Reverb();
-    track.disconnect();
-    reverb.process(track, 3, 2);
 }
 
 
