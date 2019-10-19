@@ -136,6 +136,7 @@ table {
 
 body {
     position: relative;
+    height: 80% !important;
 }
 
 #p5_loading {
@@ -151,5 +152,5 @@ body {
 
 #canvas canvas {
     width: 100% !important;
-    height: auto !important;
+    height: 80% !important;
 }
