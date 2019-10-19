@@ -1,6 +1,6 @@
 let myVid;
 let frame;
-let vidFiles = ["./yoga_downscaled.mov"];
+let vidFiles = ["./yoga_downscaled.mp4"];
 w = 180;
 h = 120;
 debug = false;
@@ -13,9 +13,7 @@ var numImages = 4;
 // video file
 var myVida; // VIDA
 var cropped = [];
-var cnt = 0;
 var idx = 0;
-var changeFlag = false;
 var downScaledVid = new p5.Image(w, h);
 var interactionStartedFlag = false;
 var letterBag = ['A SIMPLE', 'RESTORATIVE', 'POSE'];
@@ -137,7 +135,7 @@ function draw() {
             //image(downScaledVid, 0, 0, width, height);
 
             updateVideo(downScaledVid);
-            //drawFPS();
+            drawFPS();
 
 
         } else {
@@ -147,7 +145,7 @@ function draw() {
             downScaledVid.copy(myVid, 0, 0, w, h, 0, 0, downScaledW, downScaledH);
             downScaledVid.filter(GRAY);
             updateVideo(downScaledVid);
-            //drawFPS();
+            drawFPS();
 
 
         }
@@ -155,7 +153,7 @@ function draw() {
         if (debug) {
             image(myVid, 0, 0, width, height);
             myVida.drawBlobs(0, 0, width, height);
-            //drawFPS();
+            drawFPS();
 
         }
         if (!debug) {
@@ -373,24 +371,13 @@ function drawFPS() {
 }
 
 
-function updateVideo(vid) {
-    myVida.update(vid);
-}
-
-function arrayMax(arr) {
-    var len = arr.length,
-        max = -Infinity;
-    while (len--) {
-        if (arr[len] > max) {
-            max = arr[len];
-        }
-    }
-    return max;
-};
-
 function getAverage(elements) {
     let sum = elements.reduce((previous, current) => current += previous);
     let avg = sum / elements.length;
     return avg;
 
+}
+
+function updateVideo(vid) {
+    myVida.update(vid);
 }
