@@ -7,6 +7,7 @@ var rows = 2;
 var cols = 2;
 downScaledW = 320;
 downScaledH = 240;
+fpsVals = [];
 
 // video file
 var myVida; // VIDA
@@ -141,11 +142,27 @@ function windowResized() {
 
 function drawFPS() {
     let fps = frameRate();
+
+    idx = fpsVals.push(fps);
+    avgFps = getAverage(fpsVals);
     fill(255);
     stroke(0);
+
+
+    if (fpsVals != 0) {
+        text("Average FPS: " + avgFps.toFixed(2), 10, height - 20);
+    }
+
     text("FPS: " + fps.toFixed(2), 10, height - 10);
 }
 
+
+function getAverage(elements) {
+    let sum = elements.reduce((previous, current) => current += previous);
+    let avg = sum / elements.length;
+    return avg;
+
+}
 
 function updateVideo(vid) {
     myVida.update(vid);
