@@ -148,3 +148,8 @@ body {
     height: 960px;
     width: 540px;
 }
+
+#canvas canvas {
+    width: 100% !important;
+    height: auto !important;
+}

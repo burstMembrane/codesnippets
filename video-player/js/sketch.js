@@ -1,15 +1,15 @@
 let myVid;
 let frame;
-let vidFiles = ["./yoga_downscaled.mp4"];
-w = 320;
-h = 240;
+let vidFiles = ["./yoga_downscaled.mov"];
+w = 180;
+h = 120;
 debug = false;
 var threshval = 0.1;
 var rows = 2;
 var cols = 2;
-downScaledW = 320;
-downScaledH = 240;
-var numImages = 16;
+downScaledW = 180;
+downScaledH = 120;
+var numImages = 4;
 // video file
 var myVida; // VIDA
 var cropped = [];
@@ -20,7 +20,11 @@ var downScaledVid = new p5.Image(w, h);
 var interactionStartedFlag = false;
 var letterBag = ['A SIMPLE', 'RESTORATIVE', 'POSE'];
 var divisions = [2.6, 2.2, 1.9];
-//p5.disableFriendlyErrors = true; // disables FES
+var lowres = false;
+p5.disableFriendlyErrors = true; // disables FES
+let fpsVals = [];
+let avgFps = 0;
+
 function preload() {
     track = loadSound("./yogachoppedmax.mp3");
     myVid = createVideo([random(vidFiles)], videoLoaded);
@@ -41,16 +45,27 @@ function videoLoaded(video) {
 }
 
 function setup() {
+
     console.log('loading took ' + floor(millis()) + ' milliseconds');
     pixelDensity(1);
 
-    // w = windowWidth;
+    w = windowWidth;
+
+    if (w < 500) {
+
+        lowres = true;
+        console.log('low resolution mobile of ' + windowWidth + ' detected');
+
+    } else {
+        lowres = false;
+    }
 
 
     // something kind of like this ...
 
 
     var canvas = createCanvas(windowWidth, windowHeight);
+    canvas.style.width = '100%', canvas.style.height = '100%';
     canvas.parent('sketch-div');
     var x = (windowWidth - width) / 2;
     var y = (windowHeight - height) / 2;
@@ -65,7 +80,7 @@ function setup() {
 }
 
 function draw() {
-    frameRate(25);
+
     if (myVid !== null && myVid !== undefined) { // safety first
         /*
         Wait for user interaction. Some browsers prevent video playback if the
@@ -101,21 +116,47 @@ function draw() {
         //image(myVid, 0, 0, width, height);
         //image(myVida.differenceImage, 0, 0, width, height);
 
-        if (frameCount % int(random(20, 200)) == 0) {
-            rows = int(random(1, 4));
-            cols = int(random(1, 4));
+        // if (frameCount % int(random(20, 200)) == 0) {
+        //     rows = int(random(1, 4));
+        //     cols = int(random(1, 4));
+
+        // }
+        if (lowres) {
+
+            rows = 2;
+            cols = 1;
+            numImages = 4;
+            cropImg = findBlobs(numImages);
+
+            //background(0);
+            drawGrid(cropImg, rows, cols);
+
+
+            downScaledVid.copy(myVid, 0, 0, w, h, 0, 0, downScaledW, downScaledH);
+
+            //image(downScaledVid, 0, 0, width, height);
+
+            updateVideo(downScaledVid);
+            //drawFPS();
+
+
+        } else {
+            cropImg = findBlobs();
+            background(0);
+            drawGrid(cropImg, rows, cols);
+            downScaledVid.copy(myVid, 0, 0, w, h, 0, 0, downScaledW, downScaledH);
+            downScaledVid.filter(GRAY);
+            updateVideo(downScaledVid);
+            //drawFPS();
+
 
         }
-        cropImg = findBlobs();
-        background(0);
-        drawGrid(cropImg, rows, cols);
-        downScaledVid.copy(myVid, 0, 0, w, h, 0, 0, downScaledW, downScaledH)
-        updateVideo(downScaledVid);
-        drawFPS();
+
         if (debug) {
             image(myVid, 0, 0, width, height);
             myVida.drawBlobs(0, 0, width, height);
-            myVida.drawActiveZones(0, 0, width, height);
+            //drawFPS();
+
         }
         if (!debug) {
             if (!track.isPlaying()) {
@@ -127,6 +168,7 @@ function draw() {
 
 
     }
+
 }
 
 
@@ -137,7 +179,7 @@ function findBlobs() {
     //image(frame, 0, 0, w, h);
     //image(myVid, 0, 0, width, height);
 
-
+    var numBlobs = 0;
     var temp_blobs = myVida.getBlobs();
     var arrLength = temp_blobs.length;
     if (arrLength > numImages) {
@@ -151,6 +193,7 @@ function findBlobs() {
     }
     if (temp_blobs.length > 0) {
         debug = false;
+
     }
     // define size of the drawing
     temp_blobs.sort();
@@ -165,18 +208,23 @@ function findBlobs() {
 
     for (var i = 0; i < temp_blobs.length; i++) {
 
-        temp_rect_x = temp_blobs[i].normRectX * temp_w;
-        temp_rect_y = temp_blobs[i].normRectY * temp_h;
-        temp_rect_w = temp_blobs[i].normRectW * temp_w;
-        temp_rect_h = temp_blobs[i].normRectH * temp_h;
+        temp_rect_x = ~~(temp_blobs[i].normRectX * temp_w);
+        temp_rect_y = ~~(temp_blobs[i].normRectY * temp_h);
+        temp_rect_w = ~~(temp_blobs[i].normRectW * temp_w);
+        temp_rect_h = ~~(temp_blobs[i].normRectH * temp_h);
 
 
-        temp_rect_x = ~~temp_rect_x;
-        temp_rect_y = ~~temp_rect_y;
-        temp_rect_w = ~~temp_rect_w;
-        temp_rect_h = ~~temp_rect_h;
+        // temp_rect_x = ~~temp_rect_x;
+        // temp_rect_y = ~~temp_rect_y;
+        // temp_rect_w = ~~temp_rect_w;
+        // temp_rect_h = ~~temp_rect_h;
         //rect(temp_rect_x, temp_rect_y, temp_rect_w, temp_rect_h);
         cropped[i] = myVid.get(temp_rect_x, temp_rect_y, temp_rect_w, temp_rect_h);
+
+
+
+
+
     }
 
 
@@ -191,7 +239,7 @@ function drawGrid(array, rows, cols) {
     var idx = 0;
     var rows = rows;
     var cols = cols;
-    var numImages = rows * cols;
+    // var numImages = rows * cols;
     var cellHeight = height / rows;
     var cellWidth = width / cols;
 
@@ -203,15 +251,15 @@ function drawGrid(array, rows, cols) {
             var pixelX = cellWidth * x;
             var pixelY = cellHeight * y;
 
-            // //add half to center letters
-            // pixelX += cellWidth;
-            // pixelY += cellHeight;
 
             try {
 
                 image(cropped[(idx - 1) + (y * cols)], pixelX, pixelY, cellWidth, cellHeight);
-                if (idx == cropped.length) { idx = 0; }
-                //console.log(idx - 1);
+                if (idx == cropped.length) {
+                    idx = 0;
+                    cropped.length = 0;
+                }
+
             } catch (err) {
 
 
@@ -221,7 +269,6 @@ function drawGrid(array, rows, cols) {
 
 
         }
-
 
     }
 
@@ -244,7 +291,7 @@ function touchEnded() {
 
     }
     // init video (if needed)
-
+    fpsVals = [];
 }
 
 
@@ -287,12 +334,11 @@ function safeStartVideo() {
 
 function vidaSetup() {
     myVida = new Vida(this);
+    myVida.automaticPixelsDataTransferFlag = false;
     myVida.progressiveBackgroundFlag = true;
-    myVida.handleActiveZonesFlag = false;
-    myVida.normMinBlobArea = 0.0002; // uncomment if needed
+    myVida.normMinBlobArea = 0.008; // uncomment if needed
     myVida.normMaxBlobArea = 2; // uncomment if needed
     myVida.imageFilterThreshold = threshval;
-    myVida.imageFilterFeedback = 0.91;
     myVida.rejectBlobsMethod = myVida.REJECT_NONE_BLOBS;
     myVida.handleBlobsFlag = true;
     myVida.trackBlobsFlag = false;
@@ -300,7 +346,7 @@ function vidaSetup() {
 }
 
 function mouseDragged() {
-
+    debug = true;
 
 
 }
@@ -312,13 +358,39 @@ function windowResized() {
 
 function drawFPS() {
     let fps = frameRate();
+
+    idx = fpsVals.push(fps);
+    avgFps = getAverage(fpsVals);
     fill(255);
     stroke(0);
-    text("Window: " + width + "x" + height, 10, height - 20);
+
+
+    if (fpsVals != 0) {
+        text("Average FPS: " + avgFps.toFixed(2), 10, height - 20);
+    }
+
     text("FPS: " + fps.toFixed(2), 10, height - 10);
 }
 
 
 function updateVideo(vid) {
     myVida.update(vid);
+}
+
+function arrayMax(arr) {
+    var len = arr.length,
+        max = -Infinity;
+    while (len--) {
+        if (arr[len] > max) {
+            max = arr[len];
+        }
+    }
+    return max;
+};
+
+function getAverage(elements) {
+    let sum = elements.reduce((previous, current) => current += previous);
+    let avg = sum / elements.length;
+    return avg;
+
 }
