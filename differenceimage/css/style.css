@@ -1,150 +1,184 @@
-html,
-body,
-div,
-span,
-applet,
-object,
-iframe,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-blockquote,
-pre,
-a,
-abbr,
-acronym,
-address,
-big,
-cite,
-code,
-del,
-dfn,
-em,
-img,
-ins,
-kbd,
-q,
-s,
-samp,
-small,
-strike,
-strong,
-sub,
-sup,
-tt,
-var,
-b,
-u,
-i,
-center,
-dl,
-dt,
-dd,
-ol,
-ul,
-li,
-fieldset,
-form,
-label,
-legend,
-table,
-caption,
-tbody,
-tfoot,
-thead,
-tr,
-th,
-td,
-article,
-aside,
-canvas,
-details,
-embed,
-figure,
-figcaption,
-footer,
-header,
-hgroup,
-menu,
-nav,
-output,
-ruby,
-section,
-summary,
-time,
-mark,
-audio,
-video {
-    background-color: black;
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font-size: 100%;
-    font: inherit;
-    vertical-align: baseline;
-}
-
-
-/* HTML5 display-role reset for older browsers */
-
-article,
-aside,
-details,
-figcaption,
-figure,
-footer,
-header,
-hgroup,
-menu,
-nav,
-section {
-    display: block;
-}
-
-body {
-    line-height: 1;
-}
-
-#sketch-div {}
-
-ol,
-ul {
-    list-style: none;
-}
-
-blockquote,
-q {
-    quotes: none;
-}
-
-blockquote:before,
-blockquote:after,
-q:before,
-q:after {
-    content: '';
-    content: none;
-}
-
-table {
-    border-collapse: collapse;
-    border-spacing: 0;
-}
-
-body {
-    position: relative;
-}
-
-#p5_loading {
-    position: relative;
-    margin 0 auto;
-    color: white;
-    box-sizing: border-box;
-    display: block;
-    position: absolut;
-    height: 960px;
-    width: 540px;
-}
+                                                html,
+                                            body,
+                                            div,
+                                            span,
+                                            applet,
+                                            object,
+                                            iframe,
+                                            h1,
+                                            h2,
+                                            h3,
+                                            h4,
+                                            h5,
+                                            h6,
+                                            p,
+                                            blockquote,
+                                            pre,
+                                            a,
+                                            abbr,
+                                            acronym,
+                                            address,
+                                            big,
+                                            cite,
+                                            code,
+                                            del,
+                                            dfn,
+                                            em,
+                                            img,
+                                            ins,
+                                            kbd,
+                                            q,
+                                            s,
+                                            samp,
+                                            small,
+                                            strike,
+                                            strong,
+                                            sub,
+                                            sup,
+                                            tt,
+                                            var,
+                                            b,
+                                            u,
+                                            i,
+                                            center,
+                                            dl,
+                                            dt,
+                                            dd,
+                                            ol,
+                                            ul,
+                                            li,
+                                            fieldset,
+                                            form,
+                                            label,
+                                            legend,
+                                            table,
+                                            caption,
+                                            tbody,
+                                            tfoot,
+                                            thead,
+                                            tr,
+                                            th,
+                                            td,
+                                            article,
+                                            aside,
+                                            canvas,
+                                            details,
+                                            embed,
+                                            figure,
+                                            figcaption,
+                                            footer,
+                                            header,
+                                            hgroup,
+                                            menu,
+                                            nav,
+                                            output,
+                                            ruby,
+                                            section,
+                                            summary,
+                                            time,
+                                            mark,
+                                            audio,
+                                            video {
+                                                background-color: black;
+                                                margin: 0;
+                                                padding: 0;
+                                                border: 0;
+                                                font-size: 100%;
+                                                font: inherit;
+                                            }
+                                            /* HTML5 display-role reset for older browsers */
+                                            
+                                            article,
+                                            aside,
+                                            details,
+                                            figcaption,
+                                            figure,
+                                            footer,
+                                            header,
+                                            hgroup,
+                                            menu,
+                                            nav,
+                                            section {
+                                                display: block;
+                                            }
+                                            
+                                            body {
+                                                line-height: 1;
+                                            }
+                                            
+                                            #sketch-div {}
+                                            
+                                            ol,
+                                            ul {
+                                                list-style: none;
+                                            }
+                                            
+                                            blockquote,
+                                            q {
+                                                quotes: none;
+                                            }
+                                            
+                                            blockquote:before,
+                                            blockquote:after,
+                                            q:before,
+                                            q:after {
+                                                content: '';
+                                                content: none;
+                                            }
+                                            
+                                            table {
+                                                border-collapse: collapse;
+                                                border-spacing: 0;
+                                            }
+                                            
+                                            body {
+                                                position: relative;
+                                            }
+                                            
+                                            h1 {
+                                                margin 0 auto;
+                                                position: static;
+                                                font-size: 500%;
+                                                color: white;
+                                                font-family: helvetica;
+                                                text-align: center;
+                                                top: 500%;
+                                                left: 0%;
+                                                opacity: 1;
+                                                animation: myani 1s infinite;
+                                            }
+                                            
+                                            @keyframes myani {
+                                                0% {
+                                                    -webkit-transform: translateY(50%);
+                                                    transform: translateY(50%);
+                                                    opacity: 0;
+                                                }
+                                                50% {
+                                                    opacity: 1;
+                                                }
+                                                100% {
+                                                    -webkit-transform: translateY(100%);
+                                                    transform: translateY(100%);
+                                                    opacity: 0;
+                                                }
+                                            }
+                                            
+                                            @keyframes fade {
+                                                0%,
+                                                100% {
+                                                    opacity: 0
+                                                }
+                                                50% {
+                                                    opacity: 1
+                                                }
+                                            }
+                                            
+                                            #p5_loading {
+                                                position: absolute;
+                                                top: 0;
+                                                bottom: 0;
+                                                left: 0;
+                                                right: 0;
+                                                margin: auto;
+                                                background-color: black;

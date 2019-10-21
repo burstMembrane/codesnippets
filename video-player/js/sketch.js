@@ -1,20 +1,33 @@
 var myVid;
 var vidFiles = ["./yoga_downscaled.mp4"];
+var lowres;
+if (window.innerWidth < 500) {
+    lowres = true;
+    var w = 180;
+    var h = 120;
+    var rows = 1;
+    var cols = 2;
+    downScaledW = 180;
+    downScaledH = 120;
+    var numImages = 4;
 
-var w = 180;
-var h = 120;
+} else {
+    lowres = false;
+    var w = 320;
+    var h = 240;
+    var rows = 4;
+    var cols = 4;
+    downScaledW = 320;
+    downScaledH = 240;
+    var numImages = 16;
 
-var lowres = false;
+}
+
 var debug = false;
 var drawFramesPerSecond = false;
 var threshval = 0.1;
 
-var rows = 2;
-var cols = 2;
 
-downScaledW = 180;
-downScaledH = 120;
-var numImages = 4;
 
 var myVida;
 var cropped = [];
@@ -113,9 +126,13 @@ function draw() {
             updateVideo(downScaledVid);
             if (drawFramesPerSecond) { drawFPS(); }
         } else {
+
             myVid.size(320, 240);
             cropImg = findBlobs();
             background(0);
+            rows = 2;
+            cols = 2;
+            numImages = 16;
             drawGrid(cropImg, rows, cols);
             downScaledVid.copy(myVid, 0, 0, w, h, 0, 0, downScaledW, downScaledH);
             downScaledVid.filter(GRAY);
