@@ -242,7 +242,7 @@ function touchEnded() {
 function vidLoad() {
     myVid.size(w, h);
     myVid.loop();
-    myVid.hide();
+    // myVid.hide();
 }
 
 function safeStartVideo() {
