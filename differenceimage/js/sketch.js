@@ -115,7 +115,7 @@ function draw() {
         myVida.drawBlobs(0, 0, width, height);
         //drawGrid(cropImg, rows, cols);
 
-        drawFPS();
+        //drawFPS();
 
 
 
@@ -187,7 +187,7 @@ function safeStartVideo() {
 function vidaSetup() {
     myVida = new Vida(this);
     myVida.progressiveBackgroundFlag = true;
-    myVida.normMinBlobArea = 0.0002; // uncomment if needed
+    myVida.normMinBlobArea = 0.002; // uncomment if needed
     myVida.normMaxBlobArea = 0.9; // uncomment if needed
     myVida.imageFilterThreshold = 0.1;
     myVida.rejectBlobsMethod = myVida.REJECT_INNER_BLOBS;

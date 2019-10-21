@@ -23,7 +23,7 @@ var downScaledVid = new p5.Image(w, h);
 var interactionStartedFlag = false;
 
 // LOAD SCREEN
-var letterBag = ["#A SIMPLE", "#RESTORATIVE", "#POSE"];
+var letterBag = [" ", "RESTORATIVE", "CIRCULATION"];
 var divisions = [2.6, 2.2, 1.9];
 
 p5.disableFriendlyErrors = true; // disables FES
@@ -44,6 +44,7 @@ function preload() {
 
 function videoLoaded(video) {
     console.log(myVid);
+
 }
 
 function setup() {
